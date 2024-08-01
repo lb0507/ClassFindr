@@ -1,2 +1,2 @@
-# COSC4319-Project
-Project for Fall 2024 COSC 4319 (Software Engineering)
+# Fall 2024 Software Engineering Project
+Welcome to the Project for COSC 4319!
