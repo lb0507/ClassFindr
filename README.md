@@ -1,2 +1,5 @@
-# Fall 2024 Software Engineering Project
-Welcome to the Project for COSC 4319!
+# Welcome to ClassFindr!
+
+ClassFindr is designed to help new students locate their classes on campus.
+
+(Someone more creative than me enter something here please.   -Logan)
