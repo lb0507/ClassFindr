@@ -2063,11 +2063,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Logan\\source\\repos\\Test\\ClassFindr.WebClient\\ClassFindr.csproj",
+      "projectUniqueName": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\ClassFindr.csproj",
       "projectName": "ClassFindr",
-      "projectPath": "C:\\Users\\Logan\\source\\repos\\Test\\ClassFindr.WebClient\\ClassFindr.csproj",
+      "projectPath": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\ClassFindr.csproj",
       "packagesPath": "C:\\Users\\Logan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Logan\\source\\repos\\Test\\ClassFindr.WebClient\\obj\\",
+      "outputPath": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
