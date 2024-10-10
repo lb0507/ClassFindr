@@ -2,15 +2,14 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 main {
     flex: 1;
 }
 
-.sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
-}
+
 
 .top-row {
     background-color: #f7f7f7;
@@ -36,6 +35,8 @@ main {
         text-overflow: ellipsis;
     }
 
+
+/* How the page will render on mobile */
 @media (max-width: 640.98px) {
     .top-row {
         justify-content: space-between;
@@ -44,8 +45,14 @@ main {
     .top-row ::deep a, .top-row ::deep .btn-link {
         margin-left: 0;
     }
+
+    .sidebar {
+        background-color: #2818ba;
+        border-bottom: 5px ridge azure;
+    }
 }
 
+/* How the page will render on desktop */
 @media (min-width: 641px) {
     .page {
         flex-direction: row;
@@ -70,8 +77,9 @@ main {
         width: 0;
     }
 
-    .top-row, article {
-        padding-left: 2rem !important;
-        padding-right: 1.5rem !important;
+    .sidebar {
+        background-color: #2818ba;
+        border-right: 5px ridge azure;
     }
+
 }

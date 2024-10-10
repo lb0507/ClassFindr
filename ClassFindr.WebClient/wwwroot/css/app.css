@@ -1,5 +1,11 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: gainsboro;
+    height: 100%;
+}
+
+#app {
+    height: 100%;
 }
 
 h1:focus {
@@ -101,3 +107,25 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+
+/* Specific site-wide styles */
+/* ============================================================================= */
+
+input[type=text], input[type=password] {
+    border-radius: 12px;
+    border-color: gainsboro;
+    padding: 8px;
+    box-shadow: 10px 5px 5px rgba(0, 0, 255, .2);
+}
+
+.title-container {
+    width: 100%;
+    text-align: center;
+}
+
+.title {
+    width: 100%;
+    max-width: 1020px;
+}
+
+/* ============================================================================= */
