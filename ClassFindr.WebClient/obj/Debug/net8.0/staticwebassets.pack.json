@@ -1,44 +1,52 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
       "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
     },
     {
-      "Id": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\obj\\Debug\\net8.0\\compressed\\ux1z5ltcgh.gz",
+      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\obj\\Debug\\net8.0\\compressed\\ux1z5ltcgh.gz",
       "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
     },
     {
-      "Id": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ClassFindr.styles.css",
+      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ClassFindr.styles.css",
       "PackagePath": "staticwebassets\\ClassFindr.styles.css"
     },
     {
-      "Id": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\css\\app.css",
+      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\css\\app.css",
       "PackagePath": "staticwebassets\\css\\app.css"
     },
     {
-      "Id": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\icon-192.png",
+      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\icon-192.png",
       "PackagePath": "staticwebassets\\icon-192.png"
     },
     {
-      "Id": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\index.html",
-      "PackagePath": "staticwebassets\\index.html"
+      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\images\\CF_logo.png",
+      "PackagePath": "staticwebassets\\images\\CF_logo.png"
     },
     {
-      "Id": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\sample-data\\weather.json",
-      "PackagePath": "staticwebassets\\sample-data\\weather.json"
+      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\images\\samples\\sign_in_bkg.png",
+      "PackagePath": "staticwebassets\\images\\samples\\sign_in_bkg.png"
+    },
+    {
+      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\images\\titles\\classfindr_logo.png",
+      "PackagePath": "staticwebassets\\images\\titles\\classfindr_logo.png"
+    },
+    {
+      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ClassFindr.Microsoft.AspNetCore.StaticWebAssets.props",

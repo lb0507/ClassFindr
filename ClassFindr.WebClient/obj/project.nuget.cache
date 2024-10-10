@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "o9xe3Eif6RY3kvIKifSsaKLvx/pgh9xqlmH2Ht/k60Wyv0Ng8nXrc69EtD9mrOLXK/NMIz9WKz5T9nnQIW1NTw==",
+  "dgSpecHash": "GnlX0zthejnRDbyHH+A0Z+L/Nm6uzKGCbR3AX8cWzPlUSEJAaGAV6Dvy7VNo3LrloXFzKBzzMDCt8qzGC1qPNg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\ClassFindr.csproj",
+  "projectFilePath": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\ClassFindr.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Logan\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.4\\microsoft.aspnetcore.authorization.8.0.4.nupkg.sha512",
     "C:\\Users\\Logan\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.4\\microsoft.aspnetcore.components.8.0.4.nupkg.sha512",

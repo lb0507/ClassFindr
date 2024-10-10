@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\ClassFindr.csproj": {}
+    "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\ClassFindr.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\ClassFindr.csproj": {
+    "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\ClassFindr.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\ClassFindr.csproj",
+        "projectUniqueName": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\ClassFindr.csproj",
         "projectName": "ClassFindr",
-        "projectPath": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\ClassFindr.csproj",
+        "projectPath": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\ClassFindr.csproj",
         "packagesPath": "C:\\Users\\Logan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\ClassFindr.WebClient\\obj\\",
+        "outputPath": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\ClassFindr.WebClient\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
