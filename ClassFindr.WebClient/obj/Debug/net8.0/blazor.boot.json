@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "ClassFindr",
   "resources": {
-    "hash": "sha256-unotLpkjdHZFpn2siX2qQZKQ+O4RulyMtFiSiPaDdsc=",
+    "hash": "sha256-NW6RueJclHMavERwBvvPVkIc71pKp+9Bh5N7aIb5USQ=",
     "jsModuleNative": {
       "dotnet.native.8.0.4.909eicvp07.js": "sha256-ju0+XWE0ihz554eKEj0HQ8Opa61xpbUIaX5/MNo8we4="
     },
@@ -208,10 +208,10 @@
       "mscorlib.wasm": "sha256-VCfYgt1mcjITabSTosCDVZ+68ea3Z7kakTFaLNLG+18=",
       "netstandard.wasm": "sha256-YOZxxR9PM3Dltcijfb0Q4FD39DkWZbZ1e2ScbZDvWJ4=",
       "System.Private.CoreLib.wasm": "sha256-NrT1QkAzVU//2wgK9vXdq77lCGvLJ4IOZ+Aegesyanc=",
-      "ClassFindr.wasm": "sha256-T65VunaFk9jn6q5q4XMoqlUxd4706npMPXn+fcR74TI="
+      "ClassFindr.wasm": "sha256-Sre+zj9BaIg/HBOn+06kHqtJms46L6SygWnNdKAAZ0w="
     },
     "pdb": {
-      "ClassFindr.pdb": "sha256-SQ1RY6GvkIePzs/i1BDU+DTFdUrlnRGzZm5ZQUCo0mk="
+      "ClassFindr.pdb": "sha256-hGe7TsBYxZl336zJDGqv6gOZVR9K2/gjtPWf1z4KYJc="
     }
   },
   "cacheBootResources": true,

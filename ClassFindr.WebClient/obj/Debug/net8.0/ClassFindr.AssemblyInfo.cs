@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClassFindr")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7af34dc56ae484a5df2cbdcfc23cbdc8aa225a84")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e7f8eab69f1145e707bdd31896f89bf98a74dbbf")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClassFindr")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClassFindr")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
