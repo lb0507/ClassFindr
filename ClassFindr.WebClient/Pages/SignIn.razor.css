@@ -29,7 +29,7 @@ em {
 }
 
     #sign-in:hover {
-        background-color: darkslategray;
+        background-color: lightslategray;
         transition: background-color 0.5s;  /* Color fade in animation */
     }
 
