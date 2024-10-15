@@ -27,3 +27,36 @@ em {
     padding: 12px;
     box-shadow: 10px 5px 5px rgba(0, 0, 255, .2);
 }
+
+    #sign-in:hover {
+        background-color: darkslategray;
+        transition: background-color 0.5s;  /* Color fade in animation */
+    }
+
+/* Padding and positioning for the eyeball in the password field */
+/* ============================================================= */
+.pw-padding {
+    padding-right: 40px;
+}
+
+.eyeball {
+    margin-bottom: -70px;
+    margin-left: -40px;
+}
+
+    .eyeball:hover {
+        cursor: pointer;
+    }
+/* ============================================================= */
+
+#forgot-pw {
+    text-shadow: 10px 5px 5px rgba(0, 0, 255, .2);
+    text-align: end;
+    padding-top: 5px;
+}
+
+    #forgot-pw:hover {
+        color: darkslategrey;
+        cursor: pointer;
+        transition: color 0.5s;     /* Color fade in animation */
+    }
