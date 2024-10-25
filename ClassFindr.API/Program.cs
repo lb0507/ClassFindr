@@ -1,14 +1,17 @@
-using Microsoft.Azure.Functions.Worker;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿/*
+ * 
+ */
 
-var host = new HostBuilder()
-    .ConfigureFunctionsWebApplication()
-    .ConfigureServices(services =>
+using ClassFinder_API;
+
+public class Program
+{
+    public static void Main(string[] args)
     {
-        services.AddApplicationInsightsTelemetryWorkerService();
-        services.ConfigureFunctionsApplicationInsights();
-    })
-    .Build();
 
-host.Run();
+        Console.WriteLine( UserCalls.SignIn("Jane Doe", "Password123") );
+
+
+    }
+
+}

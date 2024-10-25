@@ -9,9 +9,10 @@
 <!-- Link to the page -->
 @page "/sign_in"
 
-<!-- Name of the browsertab -->
+<!-- Name of the browser tab -->
 <PageTitle>Sign In</PageTitle>
 
+<!-- Import the Cryptography library to has hpassword before submission -->
 @using System.Security.Cryptography;
 
 
@@ -126,6 +127,8 @@
         byte[] buffer = System.Text.Encoding.ASCII.GetBytes(password ?? "");    // Gets the individual bytes from the password
 
         string submission = ConvertHashToString( encryptor.ComputeHash(buffer) );   // Converts the individual bytes back to a string for submission
+
+        Console.WriteLine(submission);
 
         // ====================================
         //
