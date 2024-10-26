@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VEL5yNLqxB91Zt6xeiWFIpIEF3it8NprZKdJHZrm9y/W4fsRkNe7vHty+vmRHFWbLM/0t1rU2o6807HQljrOKw==",
+  "dgSpecHash": "6wUed87NfyDz6fEM5MnQ2iUyTvB3D4+VIK2OGC5ZDkWDbC+tO9t0eK2b2XvyYxCRAb0r9ZCH9QkzwEbC5Jqu8Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj",
+  "projectFilePath": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Logan\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
     "C:\\Users\\Logan\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",

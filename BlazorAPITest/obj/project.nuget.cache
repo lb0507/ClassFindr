@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fbjD//f2qFkPaAytke22sSq74F8PKBjkGWDWyFZ81ZjuEe6u0PKF9mHziQ11PamJUFjKmCQw3QDWgtmUaaXoKQ==",
+  "dgSpecHash": "g4hxIQIWRLMiWIqHoaggik3Vh5Jni6d8ES/2Er/lhUzEKEa5JIs7KPgvJZ2yNIJO9SQNykYB1dmKaQf+hdNeGg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\BlazorAPITest.csproj",
+  "projectFilePath": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\BlazorAPITest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Logan\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
     "C:\\Users\\Logan\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",

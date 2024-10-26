@@ -625,11 +625,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\BlazorAPITest.csproj",
+      "projectUniqueName": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\BlazorAPITest.csproj",
       "projectName": "BlazorAPITest",
-      "projectPath": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\BlazorAPITest.csproj",
+      "projectPath": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\BlazorAPITest.csproj",
       "packagesPath": "C:\\Users\\Logan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\",
+      "outputPath": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -651,8 +651,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Logan\\source\\repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj": {
-              "projectPath": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj"
+            "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj": {
+              "projectPath": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj"
             }
           }
         }

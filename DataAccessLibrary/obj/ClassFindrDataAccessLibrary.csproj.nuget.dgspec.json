@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Logan\\source\\repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj": {}
+    "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Logan\\source\\repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj": {
+    "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj",
         "projectName": "ClassFindrDataAccessLibrary",
-        "projectPath": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj",
+        "projectPath": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj",
         "packagesPath": "C:\\Users\\Logan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\DataAccessLibrary\\obj\\",
+        "outputPath": "C:\\Users\\Logan\\Source\\Repos\\ClassFindr\\DataAccessLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
