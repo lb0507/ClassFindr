@@ -619,24 +619,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Logan\\.nuget\\packages\\": {},
-    "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\oryad\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\BlazorAPITest.csproj",
+      "projectUniqueName": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\BlazorAPITest.csproj",
       "projectName": "BlazorAPITest",
-      "projectPath": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\BlazorAPITest.csproj",
-      "packagesPath": "C:\\Users\\Logan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\",
+      "projectPath": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\BlazorAPITest.csproj",
+      "packagesPath": "C:\\Users\\oryad\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Logan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\oryad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -651,8 +646,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Logan\\source\\repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj": {
-              "projectPath": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj"
+            "C:\\Users\\oryad\\source\\repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj": {
+              "projectPath": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\DataAccessLibrary\\ClassFindrDataAccessLibrary.csproj"
             }
           }
         }
@@ -690,7 +685,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

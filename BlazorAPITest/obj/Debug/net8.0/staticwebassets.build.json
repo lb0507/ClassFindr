@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XCBnVxd7cUTbyTkBkIsPGncxvKnGeMA7ttqMZQavXNI=",
+  "Hash": "c1gBPGBi5Fan31h7IpiublvakmGdqsZxPRQoHbnjkZE=",
   "Source": "BlazorAPITest",
   "BasePath": "_content/BlazorAPITest",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "BlazorAPITest\\wwwroot",
       "Source": "BlazorAPITest",
-      "ContentRoot": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
       "BasePath": "_content/BlazorAPITest",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\bundle\\BlazorAPITest.styles.css",
+      "Identity": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\bundle\\BlazorAPITest.styles.css",
       "SourceId": "BlazorAPITest",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/BlazorAPITest",
       "RelativePath": "BlazorAPITest.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\bundle\\BlazorAPITest.styles.css"
+      "OriginalItemSpec": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\bundle\\BlazorAPITest.styles.css"
     },
     {
-      "Identity": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorAPITest.bundle.scp.css",
+      "Identity": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorAPITest.bundle.scp.css",
       "SourceId": "BlazorAPITest",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/BlazorAPITest",
       "RelativePath": "BlazorAPITest.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorAPITest.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorAPITest.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\app.css",
+      "Identity": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\app.css",
       "SourceId": "BlazorAPITest",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
       "BasePath": "_content/BlazorAPITest",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "BlazorAPITest",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
       "BasePath": "_content/BlazorAPITest",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "BlazorAPITest",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
       "BasePath": "_content/BlazorAPITest",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\favicon.png",
       "SourceId": "BlazorAPITest",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
       "BasePath": "_content/BlazorAPITest",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
-      "Identity": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\images\\CF_logo.png",
+      "Identity": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\images\\CF_logo.png",
       "SourceId": "BlazorAPITest",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
       "BasePath": "_content/BlazorAPITest",
       "RelativePath": "images/CF_logo.png",
       "AssetKind": "All",
@@ -150,10 +150,10 @@
       "OriginalItemSpec": "wwwroot\\images\\CF_logo.png"
     },
     {
-      "Identity": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\images\\samples\\sign_in_bkg.png",
+      "Identity": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\images\\samples\\sign_in_bkg.png",
       "SourceId": "BlazorAPITest",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
       "BasePath": "_content/BlazorAPITest",
       "RelativePath": "images/samples/sign_in_bkg.png",
       "AssetKind": "All",
@@ -169,10 +169,10 @@
       "OriginalItemSpec": "wwwroot\\images\\samples\\sign_in_bkg.png"
     },
     {
-      "Identity": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\images\\titles\\classfindr_logo.png",
+      "Identity": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\images\\titles\\classfindr_logo.png",
       "SourceId": "BlazorAPITest",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\oryad\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
       "BasePath": "_content/BlazorAPITest",
       "RelativePath": "images/titles/classfindr_logo.png",
       "AssetKind": "All",
