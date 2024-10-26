@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ClassFindr.WebClient"
   ],
-  "SelectedNode": "\\CFFuncTest.sln",
+  "SelectedNode": "\\ClassFindr.WebClient\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

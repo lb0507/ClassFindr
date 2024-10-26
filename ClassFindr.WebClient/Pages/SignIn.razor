@@ -123,33 +123,12 @@
     */
     private void SubmitPassword()
     {
-        SHA256 encryptor = SHA256.Create();     // Creates the hashing class to use SHA-256
-        byte[] buffer = System.Text.Encoding.ASCII.GetBytes(password ?? "");    // Gets the individual bytes from the password
+        string hashedPW = Utils.Security.Hash(password);
 
-        string submission = ConvertHashToString( encryptor.ComputeHash(buffer) );   // Converts the individual bytes back to a string for submission
+        Console.WriteLine(hashedPW);
 
-        Console.WriteLine(submission);
 
-        // ====================================
-        //
-        // CODE FOR CALLING THE API GOES HERE
-        //
-        // ====================================
 
-        encryptor.Clear();  // Similar to .Close() when closing a file.  Releases memory being used by the hash class
     }
 
-    // Converts the string of bytes into a string
-    private string ConvertHashToString(byte[] hashed)
-    {
-        string output = "";
-
-        // Convert each byte to a character and add it to the output
-        foreach (byte c in hashed)
-        {
-            output += (char) c;
-        }
-
-        return output;
-    }
 }
