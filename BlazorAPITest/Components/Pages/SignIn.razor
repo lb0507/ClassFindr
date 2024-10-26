@@ -1,0 +1,144 @@
+﻿@*
+
+    The sign in page of the project.
+
+    Version 10.15.24
+
+*@
+
+<!-- Link to the page -->
+@page "/sign_in"
+
+<!-- Allow user to interact with the page -->
+@rendermode InteractiveServer
+
+<!-- Name of the browser tab -->
+<PageTitle>Sign In</PageTitle>
+
+<!-- Import the API calls and necessary models -->
+@using ClassFindrDataAccessLibrary
+@using ClassFindrDataAccessLibrary.Models
+
+<!-- Inject User API call and page navigation dependencies -->
+@inject IUserData _db
+@inject NavigationManager nav
+
+
+<div class="background">
+
+    <!-- Title of the page -->
+    <div class="title-container py-3">
+        <img src="/images/titles/classfindr_logo.png" class="title" />
+    </div>
+
+    <!-- Username text input field -->
+    <div class="w-100 py-4 my-4" style="text-align: center">
+        <div class="input-container">
+
+            <em><b> Username </b></em>
+            <input type="text" @bind-value="@username"/>
+
+        </div>
+    </div>
+
+    <!-- Password text/password input field -->
+    <div class="w-100 py-4 my-4" style="text-align: center">
+
+        <div class="input-container" style="margin-left: -15px">
+
+            <em><b> Password </b></em>
+
+            @if (!isHidden)
+            {
+                // Display the input as a text field - Password is SHOWN
+                <input type="text" class="pw-padding" @bind-value="@password">
+            }
+            else
+            {
+                // Display the input as a password field - Password is HIDDEN
+                <input type="password" class="pw-padding" @bind-value="@password">
+            }
+            
+            <text id="forgot-pw"><b>Forgot Password</b></text>
+            
+        </div>
+
+        @if (!isHidden)
+        {
+            // Display the eyeball within the password field as HIDDEN
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                width="22" 
+                height="22" 
+                fill="black" 
+                class="bi bi-eye-slash-fill eyeball" 
+                viewBox="0 0 16 16" 
+                @onclick="() => ToggleHidden()"
+                >
+                <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z" />
+                <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z" />
+            </svg>
+        }
+        else
+        {
+            // Display the eyeball within the password field as SHOWN
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                width="22" 
+                height="22" 
+                fill="black" 
+                class="bi bi-eye-fill eyeball" 
+                viewBox="0 0 16 16" 
+                @onclick="() => ToggleHidden()"
+                >
+                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+            </svg>
+        }
+
+    </div>
+
+    <div class="py-4 my-4"/>    <!-- Vertical spacing -->
+
+    <!-- Sign in button -->
+    <div class="w-100 py-4 my-4" style="text-align: center">
+        <div class="input-container">
+
+            <button id="sign-in" @onclick="() => SubmitPassword()">
+                <i><b> Sign In </b></i>
+            </button>
+
+        </div>
+    </div>
+
+</div>
+
+
+@code {
+
+    private bool isHidden = true;   // Determines if the password is currently being hidden or shown
+
+    private string? username;   // Holds the value of the inputted username
+    private string? password;   // Holds the value of the inputted password
+
+    bool test = false;
+
+    private void ToggleHidden() => isHidden = !isHidden;    // Toggles the password field
+
+
+    /*
+    * Submites the username and password to the API to read 
+    * the database for the specific user
+    */
+    private async void SubmitPassword()
+    {
+        Console.WriteLine($"{username}  {password}");
+        bool isValid = await _db.SignIn(username?.Trim() ?? "", password?.Trim() ?? "");
+
+        // Navigate back to the home page if the user has been found
+        if (isValid)
+        {
+            nav.NavigateTo("/");
+        }
+
+    }
+
+}
