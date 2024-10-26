@@ -1,0 +1,56 @@
+﻿@page "/UserData"
+
+@using ClassFindrDataAccessLibrary
+@using ClassFindrDataAccessLibrary.Models
+
+@inject IUserData _db
+
+<h3>User Test Page</h3>
+
+<h4>Current People</h4>
+@if (users == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>SRef</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                
+                <tr>
+                    <td>@user.UID</td>
+                    <td>@user.Username</td>
+                    <td>@user.Password</td>
+                    <td>@user.Email</td>
+                    <td>@user.Type</td>
+                    <td>@user.ScheduleRef</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+
+    private List<UserModel>? users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //users = await _db.GetUsers();
+    }
+
+}

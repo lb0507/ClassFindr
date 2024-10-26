@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "ClassFindr.API": {
-      "commandName": "Project",
-      "commandLineArgs": "--port 7032",
-      "launchBrowser": false
-    }
-  }
-}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassFindr", "ClassFindr.csproj", "{7BA7B074-A129-417D-A685-7B128C75820B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassFindrDataAccessLibrary", "..\DataAccessLibrary\ClassFindrDataAccessLibrary.csproj", "{7C33B15C-0714-41B2-AE1D-94297C342839}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BA7B074-A129-417D-A685-7B128C75820B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BA7B074-A129-417D-A685-7B128C75820B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BA7B074-A129-417D-A685-7B128C75820B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BA7B074-A129-417D-A685-7B128C75820B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C33B15C-0714-41B2-AE1D-94297C342839}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C33B15C-0714-41B2-AE1D-94297C342839}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C33B15C-0714-41B2-AE1D-94297C342839}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C33B15C-0714-41B2-AE1D-94297C342839}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA7312F6-F911-42E5-BC3D-F4D865761FC2}
+	EndGlobalSection
+EndGlobal
