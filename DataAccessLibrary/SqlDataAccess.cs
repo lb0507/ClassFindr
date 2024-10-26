@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,21 +43,21 @@ namespace ClassFindrDataAccessLibrary
             // Gets the connection string
             string connectionString = _config.GetConnectionString(ConnectionStringName) ?? "";
 
-            // Open the connection and use it
-            using (IDbConnection connection = new SqlConnection(connectionString))
+            try
             {
-                try
-                {
-                    var data = await connection.QuerySingleAsync<T>(sql);
-                    return data;
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine($"Failure to execute \"LoadSingle\" at {DateTime.Now}");
-                }
 
-                return default(T);
+                // Open the connection and use it
+                IDbConnection connection = new SqlConnection(connectionString);
 
+                var data = await connection.QuerySingleAsync<T>(sql);
+                connection.Close();     // Close connection, return space to pool
+
+                return data;
+
+            }
+            catch (Exception)
+            {
+                throw;      // Throw the exception to be handeled by a specific method
             }
         }
 

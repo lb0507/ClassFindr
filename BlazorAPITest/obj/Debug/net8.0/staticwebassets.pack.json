@@ -1,35 +1,35 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorAPITest.bundle.scp.css",
+      "Id": "C:\\Users\\logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorAPITest.bundle.scp.css",
       "PackagePath": "staticwebassets\\BlazorAPITest.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\app.css",
+      "Id": "C:\\Users\\logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\wwwroot\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\images\\CF_logo.png",
+      "Id": "C:\\Users\\logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\wwwroot\\images\\CF_logo.png",
       "PackagePath": "staticwebassets\\images\\CF_logo.png"
     },
     {
-      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\images\\samples\\sign_in_bkg.png",
+      "Id": "C:\\Users\\logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\wwwroot\\images\\samples\\sign_in_bkg.png",
       "PackagePath": "staticwebassets\\images\\samples\\sign_in_bkg.png"
     },
     {
-      "Id": "C:\\Users\\Logan\\source\\repos\\ClassFindr\\BlazorAPITest\\wwwroot\\images\\titles\\classfindr_logo.png",
+      "Id": "C:\\Users\\logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\wwwroot\\images\\titles\\classfindr_logo.png",
       "PackagePath": "staticwebassets\\images\\titles\\classfindr_logo.png"
     },
     {

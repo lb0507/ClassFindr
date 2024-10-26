@@ -17,23 +17,40 @@ namespace ClassFindrDataAccessLibrary
         /// </summary>
         /// <param name="username"> The inputted username </param>
         /// <param name="password"> The normal, unhashed password that the user has inputted  </param>
-        /// <returns> True if the user can log in </returns>
-        public async Task<bool> SignIn(string username, string password)
+        /// <returns> Tuple containing if the user has been succefully signed in or not, and the appropriate message associated with the result </returns>
+        public async Task<Tuple<bool, string>> SignIn(string username, string password)
         {
             // Username sanitization.  Prevents any [redacted] in the class from doing SQL injection.
-            if (username.Contains('\'')) return false;
+            if (username.Contains('\'')) return new(false, "Invalid username");
 
-            // Form the SQL query
-            string query = $"SELECT * FROM [dbo].[User] WHERE [Username] = '{username}'";
+            try
+            {
+                // Form the SQL query
+                string query = $"SELECT * FROM [dbo].[User] WHERE [Username] = '{username}'";
 
-            // Gets a list of users that match the query.  Should have only one user, unless we mess up somewhere
-            UserModel? selectedUser = await _db.LoadSingle<UserModel>(query);
+                // Gets a list of users that match the query.  Should have only one user, unless we mess up somewhere
+                UserModel? selectedUser = await _db.LoadSingle<UserModel>(query);
 
-            Console.WriteLine(selectedUser?.ToString());
+                Console.WriteLine(selectedUser?.ToString());
 
-            string hashedPW = Utils.Security.Hash(password);    // Hash the password for submission
+                string hashedPW = Utils.Security.Hash(password);    // Hash the password for submission
 
-            return selectedUser?.Password == hashedPW;
+                bool isValid = selectedUser?.Password == hashedPW;  // Get whether or not the password mathces
+
+                if (isValid)
+                {
+                    return new(true, "Successful sign in");
+                }
+                else
+                {
+                    return new(false, "Invalid password");
+                }
+
+            }
+            catch (Exception)
+            {
+                return new(false, "Failure logging in");
+            }
         }
 
         /// <summary>

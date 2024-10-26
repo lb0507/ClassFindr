@@ -2,7 +2,7 @@
 
     The sign in page of the project.
 
-    Version 10.15.24
+    Version 10.26.24
 
 *@
 
@@ -116,6 +116,8 @@
 
 @code {
 
+    // private Modal modal = default!;
+
     private bool isHidden = true;   // Determines if the password is currently being hidden or shown
 
     private string? username;   // Holds the value of the inputted username
@@ -133,12 +135,17 @@
     private async void SubmitPassword()
     {
         Console.WriteLine($"{username}  {password}");
-        bool isValid = await _db.SignIn(username?.Trim() ?? "", password?.Trim() ?? "");
+        var results = await _db.SignIn(username?.Trim() ?? "", password?.Trim() ?? "");
 
         // Navigate back to the home page if the user has been found
-        if (isValid)
+        if (results.Item1 == true)
         {
             nav.NavigateTo("/");
+        }
+        else
+        {
+            Console.WriteLine(results.Item2);
+            //await modal.ShowAsync<string>("Failure to sign in:", results.Item2);    // Show the modal with the fail message
         }
 
     }
