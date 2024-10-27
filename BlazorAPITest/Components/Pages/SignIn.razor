@@ -2,7 +2,7 @@
 
     The sign in page of the project.
 
-    Version 10.15.24
+    Version 10.26.24
 
 *@
 
@@ -23,6 +23,13 @@
 @inject IUserData _db
 @inject NavigationManager nav
 
+
+<!-- Message displayed when the sign in is unsuccessful -->
+<Modal @ref=modal Title="Failure to Sign In">
+    <BodyTemplate>
+        @modalMsg
+    </BodyTemplate>
+</Modal>
 
 <div class="background">
 
@@ -59,9 +66,11 @@
                 <input type="password" class="pw-padding" @bind-value="@password">
             }
             
-            <a id="forgot-pw" href="forgot_password">
-                <b>Forgot Password</b>
-            </a>
+            <div id="forgot-pw">
+                <a href="forgot_password" style="color: white">
+                    <b id="fpw-text">Forgot Password</b>
+                </a>
+            </div>
             
         </div>
 
@@ -116,15 +125,16 @@
 
 @code {
 
+    private Modal modal = default!;
+
     private bool isHidden = true;   // Determines if the password is currently being hidden or shown
 
     private string? username;   // Holds the value of the inputted username
     private string? password;   // Holds the value of the inputted password
 
-    bool test = false;
-
     private void ToggleHidden() => isHidden = !isHidden;    // Toggles the password field
 
+    private string? modalMsg;
 
     /*
     * Submites the username and password to the API to read 
@@ -133,12 +143,18 @@
     private async void SubmitPassword()
     {
         Console.WriteLine($"{username}  {password}");
-        bool isValid = await _db.SignIn(username?.Trim() ?? "", password?.Trim() ?? "");
+        var results = await _db.SignIn(username?.Trim() ?? "", password?.Trim() ?? "");
 
         // Navigate back to the home page if the user has been found
-        if (isValid)
+        if (results.Item1 == true)
         {
             nav.NavigateTo("/");
+        }
+        else
+        {
+            modalMsg = results.Item2;   // Set the message shown in the modal
+            await modal.ShowAsync();    // Show the modal with the fail message
+            modalMsg = default;     // Reset the message in the modal to null
         }
 
     }
