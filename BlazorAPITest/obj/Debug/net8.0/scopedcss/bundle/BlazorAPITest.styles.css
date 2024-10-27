@@ -181,6 +181,11 @@ main[b-89sllm1tyd] {
         overflow-y: auto;
     }
 }
+/* _content/BlazorAPITest/Components/Pages/Home.razor.rz.scp.css */
+#map-container[b-3e3jcrw3z4] {
+    width: 100%;
+    height: 100%;
+}
 /* _content/BlazorAPITest/Components/Pages/SignIn.razor.rz.scp.css */
 .background[b-hbnhpti6zq] {
     width: 100%;

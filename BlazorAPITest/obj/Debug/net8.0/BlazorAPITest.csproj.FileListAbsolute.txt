@@ -91,3 +91,4 @@ C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\Microsoft.
 C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\Microsoft.JSInterop.dll
+C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\obj\Debug\net8.0\scopedcss\Components\Pages\Home.razor.rz.scp.css

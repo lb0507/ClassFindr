@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "sOqV1wzZ4OKkTM2B71R1AxZfdlhTonu151iBtRvJfqw=",
+  "Hash": "4AQOx/WCAoSIGMJ9NbksusUU7N1dEiLvGg0ZXh2/Pso=",
   "Source": "BlazorAPITest",
   "BasePath": "_content/BlazorAPITest",
   "Mode": "Default",
@@ -319,6 +319,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\titles\\classfindr_logo.png"
+    },
+    {
+      "Identity": "C:\\Users\\logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\wwwroot\\Map.js",
+      "SourceId": "BlazorAPITest",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\wwwroot\\",
+      "BasePath": "_content/BlazorAPITest",
+      "RelativePath": "Map.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Map.js"
     }
   ]
 }

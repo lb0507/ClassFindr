@@ -5,19 +5,57 @@
     It's important that we nail this, as it will be the page that 
     the user spends most of their time on.
 
-    Version 10.09.24
+    Version 10.27.26
     
 *@
 
 <!-- Link to the page -->
 @page "/"
 
+<!-- Allow user to interact with the page -->
+@rendermode InteractiveServer
+
+<!-- Inject the JavaScript dependency for using JS -->
+@inject IJSRuntime JSRuntime
+
 <!-- Name of the browser tab -->
 <PageTitle>Home</PageTitle>
 
 
 <div class="content px-4">
-    <h1>Hello, world!</h1>
+    <h1>Home Page</h1>
 
     This will be the home page of the ClassFindr, including a functioning map that can direct users to their next location on campus.
+
+    @* !!! STAR OF THE SHOW !!! *@
+    @* ====================================== *@
+    <div id="map-container">
+        <div id="map" style="height: 75vh"/>
+    </div>
+    @* ====================================== *@
+
 </div>
+
+
+@code {
+
+    private IJSObjectReference? module;
+    private string? result;
+
+    // This method sets up the map
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Imports the JS functions from Map.js
+            module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./Map.js");
+
+            if (module != null)
+            {
+                // Execute the load map function
+                result = await module.InvokeAsync<string>("load_map");
+            }
+        }
+    }
+
+}
