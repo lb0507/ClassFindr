@@ -47,12 +47,13 @@ namespace ClassFindrDataAccessLibrary
             {
 
                 // Open the connection and use it
-                IDbConnection connection = new SqlConnection(connectionString);
+                using (IDbConnection connection = new SqlConnection(connectionString))
+                {
+                    var data = await connection.QuerySingleAsync<T>(sql);
+                    connection.Close();     // Close connection, return space to pool
 
-                var data = await connection.QuerySingleAsync<T>(sql);
-                connection.Close();     // Close connection, return space to pool
-
-                return data;
+                    return data;
+                }
 
             }
             catch (Exception)

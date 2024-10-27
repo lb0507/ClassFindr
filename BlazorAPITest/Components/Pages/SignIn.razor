@@ -24,6 +24,8 @@
 @inject NavigationManager nav
 
 
+<Modal @ref="modal"/>
+
 <div class="background">
 
     <!-- Title of the page -->
@@ -59,9 +61,11 @@
                 <input type="password" class="pw-padding" @bind-value="@password">
             }
             
-            <a id="forgot-pw" href="forgot_password">
-                <b>Forgot Password</b>
-            </a>
+            <div id="forgot-pw">
+                <a href="forgot_password" style="color: white">
+                    <b id="fpw-text">Forgot Password</b>
+                </a>
+            </div>
             
         </div>
 
@@ -116,7 +120,7 @@
 
 @code {
 
-    // private Modal modal = default!;
+    private Modal modal = default!;
 
     private bool isHidden = true;   // Determines if the password is currently being hidden or shown
 
@@ -145,7 +149,7 @@
         else
         {
             Console.WriteLine(results.Item2);
-            //await modal.ShowAsync<string>("Failure to sign in:", results.Item2);    // Show the modal with the fail message
+            await modal.ShowAsync<string>("Failure to sign in:", results.Item2);    // Show the modal with the fail message
         }
 
     }

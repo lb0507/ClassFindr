@@ -81,3 +81,13 @@ C:\Users\Logan\source\repos\ClassFindr\BlazorAPITest\obj\Debug\net8.0\refint\Bla
 C:\Users\Logan\source\repos\ClassFindr\BlazorAPITest\obj\Debug\net8.0\BlazorAPITest.pdb
 C:\Users\Logan\source\repos\ClassFindr\BlazorAPITest\obj\Debug\net8.0\BlazorAPITest.genruntimeconfig.cache
 C:\Users\Logan\source\repos\ClassFindr\BlazorAPITest\obj\Debug\net8.0\ref\BlazorAPITest.dll
+C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\BlazorBootstrap.dll
+C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\Microsoft.AspNetCore.Components.dll
+C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Forms.dll
+C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Web.dll
+C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\logan\Source\Repos\ClassFindr\BlazorAPITest\bin\Debug\net8.0\Microsoft.JSInterop.dll

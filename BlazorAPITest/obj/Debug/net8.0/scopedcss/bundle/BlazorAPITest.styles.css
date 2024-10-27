@@ -1,3 +1,5 @@
+@import '_content/Blazor.Bootstrap/Blazor.Bootstrap.bundle.scp.css';
+
 /* _content/BlazorAPITest/Components/Layout/MainLayout.razor.rz.scp.css */
 .page[b-89sllm1tyd] {
     position: relative;
@@ -211,8 +213,8 @@ em[b-hbnhpti6zq] {
 }
 
     #sign-in:hover[b-hbnhpti6zq] {
-        background-color: lightslategray;
-        transition: background-color 0.5s;  /* Color fade in animation */
+        background-color: darkblue;
+        transition: background-color 0.2s;  /* Color fade in animation */
     }
 
 /* Padding and positioning for the eyeball in the password field */
@@ -237,8 +239,8 @@ em[b-hbnhpti6zq] {
     padding-top: 5px;
 }
 
-    #forgot-pw:hover[b-hbnhpti6zq] {
-        color: darkslategrey;
-        cursor: pointer;
-        transition: color 0.5s;     /* Color fade in animation */
-    }
+#fpw-text:hover[b-hbnhpti6zq] {
+    color: darkslategrey;
+    cursor: pointer;
+    transition: color 0.5s;     /* Color fade in animation */
+}

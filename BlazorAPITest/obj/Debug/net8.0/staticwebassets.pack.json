@@ -9,14 +9,6 @@
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "C:\\Users\\logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\wwwroot\\bootstrap\\bootstrap.min.css",
-      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
-    },
-    {
-      "Id": "C:\\Users\\logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\wwwroot\\bootstrap\\bootstrap.min.css.map",
-      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
-    },
-    {
       "Id": "C:\\Users\\logan\\Source\\Repos\\ClassFindr\\BlazorAPITest\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },

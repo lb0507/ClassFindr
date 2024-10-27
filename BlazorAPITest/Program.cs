@@ -3,6 +3,8 @@ using ClassFindrDataAccessLibrary;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddBlazorBootstrap();  // Add bootstrap library to project
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
