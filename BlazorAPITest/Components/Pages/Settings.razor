@@ -1,21 +1,121 @@
 ﻿@*
-
-    the page where a user can modify or reset their settings.
-
-    Version 10.25.24
-
+    The settings page of the project.
+    Version 10.26.24
 *@
 
-<!-- Link to the page -->
+
 @page "/settings"
 
-<!-- Name of the browser tab -->
+@rendermode InteractiveServer
+
 <PageTitle>Settings</PageTitle>
 
-<div class="content px-4">
+@*Styles for the settings page*@
+<style>
+    @* Header "User Settings" layout*@
+    h1 {
+        text-align: left;
+    }
 
-    <h1>User Settings Page</h1>
+    @*Overall button layout*@
+    button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
 
-    <p>This will be the page where a user can modify their application settings, such as default values for various things.</p>
+    @*Change password button color and text color*@
+    .change-password {
+        background-color: #B8860B;
+        color: white;
+    }
 
+    @*delete account button color and text color*@
+    .delete-account {
+        background-color: #B8860B;
+        color: white;
+    }
+
+    @*logout button color and text color*@
+    .logout {
+        background-color: #FF4500;
+        color: white;
+    }
+</style>
+
+@*HTML code*@
+<div class="container">
+    <h1>User Settings</h1>
+    <hr style="border: 3px solid #FF4500; width: 100%;">
+
+    @*Change password Button Layout*@
+    <button class="change-password" @onclick="ChangePassword">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="20"
+             height="20"
+             fill="currentColor"
+             class="bi bi-lock-fill"
+             viewBox="0 0 16 16">
+            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2" />
+        </svg>
+        Change Password
+    </button>
+
+    @*Delete Account Button Layout*@
+    <button class="delete-account" @onclick="DeleteAccount">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="20"
+             height="20"
+             fill="currentColor"
+             class="bi bi-trash3-fill"
+             viewBox="0 0 16 16">
+            <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+        </svg>
+        Delete Account
+    </button>
+
+    @*Logout Button Layout*@
+    <button class="logout" @onclick="Logout">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="20"
+             height="20"
+             fill="currentColor"
+             class="bi bi-box-arrow-right"
+             viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+        </svg>
+        Logout
+    </button>
 </div>
+
+@code {
+    private void ChangePassword()
+    {
+        // Logic for changing password
+        Console.WriteLine("Change Password functionality goes here.");
+    }
+
+    private void DeleteAccount()
+    {
+        bool confirmation = Confirm("Are you sure you want to delete your account? This action cannot be undone.");
+        if (confirmation)
+        {
+            Console.WriteLine("Account deleted.");
+        }
+    }
+
+    private void Logout()
+    {
+        Console.WriteLine("You have logged out.");
+    }
+
+    private bool Confirm(string message)
+    {
+        return true; //trigger confirmation dialogue
+    }
+}

@@ -123,3 +123,4 @@ C:\Users\oryad\source\repos\ClassFindr\BlazorAPITest\obj\Debug\net8.0\scopedcss\
 C:\Users\oryad\source\repos\ClassFindr\BlazorAPITest\obj\Debug\net8.0\BlazorAP.FF69AC30.Up2Date
 C:\Users\oryad\source\repos\ClassFindr\BlazorAPITest\obj\Debug\net8.0\BlazorAPITest.genruntimeconfig.cache
 C:\Users\oryad\source\repos\ClassFindr\BlazorAPITest\obj\Debug\net8.0\ref\BlazorAPITest.dll
+C:\Users\oryad\source\repos\ClassFindr\BlazorAPITest\obj\Debug\net8.0\scopedcss\Components\Pages\About.razor.rz.scp.css
