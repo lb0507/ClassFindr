@@ -1,5 +1,6 @@
 ﻿
 using ClassFindrDataAccessLibrary.Models;
+using System.Data.SqlClient;
 
 namespace ClassFindrDataAccessLibrary
 {
@@ -23,6 +24,10 @@ namespace ClassFindrDataAccessLibrary
             // Username sanitization.  Prevents any [redacted] in the class from doing SQL injection.
             if (username.Contains('\'')) return new(false, "Invalid username");
 
+            // Return false if the user has not entered a value
+            else if (username.Length < 1) return new(false, "Please enter a username");
+            else if (password.Length < 1) return new(false, "Please enter a password");
+
             try
             {
                 // Form the SQL query
@@ -43,13 +48,22 @@ namespace ClassFindrDataAccessLibrary
                 }
                 else
                 {
-                    return new(false, "Invalid password");
+                    return new(false, "Password is incorrect");
                 }
 
             }
-            catch (Exception)
+            catch (SqlException)
             {
-                return new(false, "Failure logging in");
+                return new(false, "IP not allowed");
+            }
+            catch (InvalidOperationException)
+            {
+                return new(false, "Username is incorrect");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new(false, "Unhandled error - contact administrator for details");
             }
         }
 
