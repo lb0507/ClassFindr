@@ -1,30 +1,242 @@
 ﻿@*
 
-    The page where a user can create an account to access all 
-    features of ClassFindr available to their type.
+    The page of the projec where a user can create an account.
 
-    Version 10.25.24
+    Version 10.27.24
 
 *@
 
 <!-- Link to the page -->
 @page "/sign_up"
 
+<!-- Allow user to interact with the page -->
+@rendermode InteractiveServer
+
 <!-- Name of the browser tab -->
-<PageTitle>Forgot Password</PageTitle>
+<PageTitle>Sign Up</PageTitle>
 
-<div class="content px-4">
+<!-- Import the API calls and necessary models -->
+@using ClassFindrDataAccessLibrary
+@using ClassFindrDataAccessLibrary.Models
 
-    <h1>User Sign Up Page</h1>
+<!-- Inject User API call and page navigation dependencies -->
+@inject IUserData _db
+@inject NavigationManager nav
 
-    <p>This will be the page where a user can create a ClassFindr account.</p>
 
-    <u>This will need the following at some point:</u>
-    <ul>
-        <li> Text input for new Username <em>Note that we will need to check that the username is unique!</em> </li>
-        <li>  </li>
-        <li>  </li>
-        <li>  </li>
-    </ul>
+<!-- Message displayed when sign up is unsuccessful -->
+<Modal @ref=modal Title="Failure to Create User">
+    <BodyTemplate>
+        @modalMsg
+    </BodyTemplate>
+</Modal>
+
+<!-- Main body of the page -->
+<div class="background">
+
+    <!-- Title of the page -->
+    <div class="title-container py-3">
+        <img src="/images/titles/sign_up.png" class="title" style="max-width: 750px"/>
+    </div>
+
+    <!-- Email text input field -->
+    <div class="w-100 my-4" style="text-align: center">
+        <div class="input-container">
+
+            <em><b> Email </b></em>
+            <input type="text" @bind-value="@username" />
+
+        </div>
+    </div>
+
+    <!-- Username text input field -->
+    <div class="w-100 my-4" style="text-align: center">
+        <div class="input-container">
+
+            <em><b> Username </b></em>
+            <input type="text" @bind-value="@username" />
+
+        </div>
+    </div>
+
+    <!-- Password text/password input field -->
+    <div class="w-100 my-4" style="text-align: center">
+
+        <div class="input-container" style="margin-left: -15px">
+
+            <em><b> Password </b></em>
+
+            @if (!isHidden)
+            {
+                // Display the input as a text field - Password is SHOWN
+                <input type="text" class="pw-padding" @bind-value="@password">
+            }
+            else
+            {
+                // Display the input as a password field - Password is HIDDEN
+                <input type="password" class="pw-padding" @bind-value="@password">
+            }
+
+        </div>
+
+        @if (!isHidden)
+        {
+            // Display the eyeball within the password field as HIDDEN
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="22"
+                 height="22"
+                 fill="black"
+                 class="bi bi-eye-slash-fill eyeball"
+                 viewBox="0 0 16 16"
+                 @onclick="() => ToggleHidden()">
+                <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z" />
+                <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z" />
+            </svg>
+        }
+        else
+        {
+            // Display the eyeball within the password field as SHOWN
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="22"
+                 height="22"
+                 fill="black"
+                 class="bi bi-eye-fill eyeball"
+                 viewBox="0 0 16 16"
+                 @onclick="() => ToggleHidden()">
+                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+            </svg>
+        }
+
+    </div>
+
+    <!-- Password confirmation text/password input field -->
+    <div class="w-100 my-4" style="text-align: center">
+
+        <div class="input-container" style="margin-left: -15px">
+
+            <em><b> *Confirm Password </b></em>
+
+            @if (!isHidden)
+            {
+                // Display the input as a text field - Password is SHOWN
+                <input type="text" class="pw-padding" @bind-value="@password">
+            }
+            else
+            {
+                // Display the input as a password field - Password is HIDDEN
+                <input type="password" class="pw-padding" @bind-value="@password">
+            }
+
+        </div>
+
+        @if (!isHidden)
+        {
+            // Display the eyeball within the password field as HIDDEN
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="22"
+                 height="22"
+                 fill="black"
+                 class="bi bi-eye-slash-fill eyeball"
+                 viewBox="0 0 16 16"
+                 @onclick="() => ToggleHidden()">
+                <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z" />
+                <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z" />
+            </svg>
+        }
+        else
+        {
+            // Display the eyeball within the password field as SHOWN
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="22"
+                 height="22"
+                 fill="black"
+                 class="bi bi-eye-fill eyeball"
+                 viewBox="0 0 16 16"
+                 @onclick="() => ToggleHidden()">
+                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+            </svg>
+        }
+
+    </div>
+
+    <div class="py-4 my-4" />    <!-- Vertical spacing -->
+
+    <!-- Sign up button -->
+    <div class="w-100 py-4 mt-4" style="text-align: center">
+        <div class="input-container">
+
+            <button id="sign-up" @onclick="() => SubmitCreatedUser()">
+                <i><b> Sign Up </b></i>
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Link to sign in page -->
+    <div class="w-100 mt-4" style="text-align: center">
+
+        <span id="sign-in-link">
+            <b>
+                <text style="color: white">Already have an account? </text>
+                <a id="fpw-text" href="/sign_in" style="color: #fc5e03">Sign In</a>
+            </b>
+        </span>
+
+    </div>
 
 </div>
+
+
+@code {
+
+    private Modal modal = default!;
+
+    private bool isHidden = true;   // Determines if the password is currently being hidden or shown
+
+    private string? email;      // Holds the value of the inputted email
+    private string? username;   // Holds the value of the inputted username
+    private string? password;   // Holds the value of the inputted password
+    private string? passwordCon;   // Holds the value of the inputted password confirmation
+
+    private void ToggleHidden() => isHidden = !isHidden;    // Toggles the password field
+
+    private string? modalMsg;
+
+    /*
+    * Submites the username and password to the API to read
+    * the database for the specific user
+    */
+    private async void SubmitCreatedUser()
+    {
+        // Check if passwords match
+        if (password != passwordCon)
+        {
+            modalMsg = @"Passwords do not match";   // Set the message shown in the modal
+            await modal.ShowAsync();    // Show the modal with the fail message
+            modalMsg = default;     // Reset the message in the modal to null
+        }
+        else
+        {
+            
+        }
+
+        // Console.WriteLine($"{username}  {password}");
+        // var results = await _db.SignIn(username?.Trim() ?? "", password?.Trim() ?? "");
+
+        // // Navigate back to the home page if the user has been found
+        // if (results.Item1 == true)
+        // {
+        //     nav.NavigateTo("/");
+        // }
+        // else
+        // {
+        //     modalMsg = results.Item2;   // Set the message shown in the modal
+        //     await modal.ShowAsync();    // Show the modal with the fail message
+        //     modalMsg = default;     // Reset the message in the modal to null
+        // }
+
+    }
+
+}

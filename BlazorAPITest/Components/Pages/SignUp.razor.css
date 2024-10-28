@@ -3,7 +3,7 @@
     height: 100%;
     background-color: darkgray; /* Background color if the image fails to load */
     background-image: url(images/samples/sign_in_bkg.png);
-    background-position: left;
+    background-position: right;
 }
 
 .input-container {
@@ -18,7 +18,7 @@ em {
     text-align: start;
 }
 
-#sign-in {
+#sign-up {
     background-color: #fc5e03;
     color: white;
     font-size: 1.3rem;
@@ -28,7 +28,7 @@ em {
     box-shadow: 10px 5px 5px rgba(0, 0, 255, .2);
 }
 
-    #sign-in:hover {
+    #sign-up:hover {
         background-color: darkblue;
         transition: background-color 0.2s;  /* Color fade in animation */
     }
@@ -61,7 +61,7 @@ em {
     transition: color 0.5s;     /* Color fade in animation */
 }
 
-#sign-up-link {
+#sign-in-link {
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 10px;

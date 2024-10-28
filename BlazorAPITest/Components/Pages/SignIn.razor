@@ -31,6 +31,7 @@
     </BodyTemplate>
 </Modal>
 
+<!-- Main body of the page -->
 <div class="background">
 
     <!-- Title of the page -->
@@ -117,7 +118,24 @@
                 <i><b> Sign In </b></i>
             </button>
 
+            <div id="forgot-pw">
+                <a href="/" style="color: white">
+                    <b id="fpw-text">Continue as Guest</b>
+                </a>
+            </div>
+
         </div>
+    </div>
+
+    <div class="w-100 py-4 mt-4" style="text-align: center">
+        
+        <span id="sign-up-link">
+            <b>
+                <text style="color: white">Don't have an account? </text>
+                <a id="fpw-text" href="/sign_up" style="color: #fc5e03">Sign Up</a>
+            </b>
+        </span>
+
     </div>
 
 </div>
@@ -142,7 +160,6 @@
     */
     private async void SubmitPassword()
     {
-        Console.WriteLine($"{username}  {password}");
         var results = await _db.SignIn(username?.Trim() ?? "", password?.Trim() ?? "");
 
         // Navigate back to the home page if the user has been found

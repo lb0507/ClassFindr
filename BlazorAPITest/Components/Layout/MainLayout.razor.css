@@ -50,6 +50,10 @@ main {
         background-color: #2818ba;
         border-bottom: 5px ridge azure;
     }
+
+    article {
+        height: revert!important;
+    }
 }
 
 /* How the page will render on desktop */
@@ -80,6 +84,10 @@ main {
     .sidebar {
         background-color: #2818ba;
         border-right: 5px ridge azure;
+    }
+
+    article {
+        height: 100%;
     }
 
 }
