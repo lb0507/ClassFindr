@@ -63,10 +63,17 @@
         {
             BID = 1,
             Name = "Academic Building 1",
-            Description = "This is the computer science building!",
+            Description = 
+                "<p>Lorem ipsum dolor sit amet. Eos nesciunt facere quo ipsum expedita id nemo maiores ut officia aperiam qui dolores consequuntur 33 commodi sunt et libero quae? Et nihil blanditiis vel incidunt debitis At itaque nihil. A vero officiis sit autem accusantium et inventore laudantium. Rem architecto amet qui repellat delectus aut consequatur omnis et ratione deserunt id placeat omnis ut repellendus asperiores. </p><p>Est deserunt voluptates ut obcaecati iste aut omnis aperiam qui veritatis alias aut esse magni id officiis amet qui quaerat voluptatem. Ut quisquam dicta est accusantium quia aut molestias autem ut numquam sunt sed ratione praesentium eos ratione ipsam sit voluptas iure? </p><p>Aut distinctio tempore et dolorem temporibus non dolores reiciendis et culpa dolores. Ut omnis quod et magni distinctio et fugit impedit qui enim velit sit corrupti ratione est laborum deleniti a omnis sequi. Ad totam inventore id voluptas velit et temporibus aspernatur cum eveniet corrupti! Non velit reprehenderit ab internos autem eum quia voluptatem At quis quia et voluptate unde. </p>" +
+                "<p> THIS IS A TEST FOR MANAGING TEXT OVERFLOW! </p>" +
+                "<p> THIS IS A TEST FOR MANAGING TEXT OVERFLOW! </p>" +
+                "<p> THIS IS A TEST FOR MANAGING TEXT OVERFLOW! </p>" +
+                "<p> THIS IS A TEST FOR MANAGING TEXT OVERFLOW! </p>" +
+                "<p> THIS IS A TEST FOR MANAGING TEXT OVERFLOW! </p>",
             Latitude = 30.715125f,
             Longitude = -95.547201f,
-            DateErected = DateTime.Now
+            DateErected = DateTime.Now,
+            ImageSource = "https://i.ibb.co/HzxsDfh/AB1.jpg"
         },
         new BuildingModel
         {
@@ -113,7 +120,7 @@
                 // Iterate through each building and add it's associated marker
                 foreach (var building in buildingList)
                 {
-                    await module.InvokeVoidAsync("add_marker", building.Latitude, building.Longitude, building.Name, building.Description);
+                    await module.InvokeVoidAsync("add_marker", building.Latitude, building.Longitude, building.Name, building.Description, building.ImageSource);
                 }
             }
         }

@@ -19,5 +19,7 @@ namespace ClassFindrDataAccessLibrary.Models
         public float Latitude { get; set; }
 
         public DateTime DateErected { get; set; }
+
+        public string? ImageSource { get; set; }
     }
 }
