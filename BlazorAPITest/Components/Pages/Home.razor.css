@@ -1,4 +1,42 @@
-﻿#map-container {
-    width: 100%;
+﻿.map-container {
     height: 100%;
+    border: 5px inset #64a9d1;
+    background-color: aliceblue;
+}
+
+.info-container {
+    height: 89vh;
+    border: 5px inset #64a9d1;
+    padding: 15px;
+    background-color: aliceblue;
+}
+
+@media(min-width: 1600px) {
+    .map-container {
+        width: 50%;
+    }
+
+    .info-container {
+        width: 49%;
+        margin-left: 1%;
+    }
+
+    .main-body {
+        display: flex;
+    }
+}
+
+@media(max-width: 1599px) {
+    .map-container {
+        width: 100%;
+    }
+
+    .info-container {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .main-body {
+        display: revert;
+    }
 }

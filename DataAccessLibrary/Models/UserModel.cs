@@ -24,6 +24,5 @@ namespace ClassFindrDataAccessLibrary.Models
         {
             return $"({UID}) - {Username}  {Email}";
         }
-
     }
 }

@@ -18,21 +18,33 @@
 <!-- Inject the JavaScript dependency for using JS -->
 @inject IJSRuntime JSRuntime
 
+@using ClassFindrDataAccessLibrary.Models
+
 <!-- Name of the browser tab -->
 <PageTitle>Home</PageTitle>
 
 
 <div class="content px-4">
+
     <h1>Home Page</h1>
 
-    This will be the home page of the ClassFindr, including a functioning map that can direct users to their next location on campus.
+    <div class="main-body">
 
-    @* !!! STAR OF THE SHOW !!! *@
-    @* ====================================== *@
-    <div id="map-container">
-        <div id="map" style="height: 75vh"/>
+        @* !!! STAR OF THE SHOW !!! *@
+        @* ====================================== *@
+        <div class="map-container">
+            <div id="map" style="height: 88vh" />
+        </div>
+        @* ====================================== *@
+
+        @* Information box for the associated building *@
+        <div class="info-container">
+            <div id="markerInfo" />
+        </div>
+
+        <br/>
+
     </div>
-    @* ====================================== *@
 
 </div>
 
@@ -41,6 +53,49 @@
 
     private IJSObjectReference? module;
     private string? result;
+
+    private string? name;
+    private string? desc;
+
+    private List<BuildingModel> buildingList = new ()
+    {
+        new BuildingModel
+        {
+            BID = 1,
+            Name = "Academic Building 1",
+            Description = "This is the computer science building!",
+            Latitude = 30.715125f,
+            Longitude = -95.547201f,
+            DateErected = DateTime.Now
+        },
+        new BuildingModel
+        {
+            BID = 2,
+            Name = "Smith-Hutson Business Building",
+            Description = "Stinky business classes",
+            Latitude = 30.714313f,
+            Longitude = -95.547539f,
+            DateErected = DateTime.Now
+        },
+        new BuildingModel
+        {
+            BID = 3,
+            Name = "Lee Drain Building",
+            Description = "Math, geology, and more math, oh my!",
+            Latitude = 30.713585f,
+            Longitude = -95.548599f,
+            DateErected = DateTime.Now
+        },
+        new BuildingModel
+        {
+            BID = 4,
+            Name = "Farrington",
+            Description = "Stars, galaxies, and drunk professors",
+            Latitude = 30.713543f,
+            Longitude = -95.549657f,
+            DateErected = DateTime.Now
+        }
+    };
 
     // This method sets up the map
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -54,6 +109,12 @@
             {
                 // Execute the load map function
                 result = await module.InvokeAsync<string>("load_map");
+
+                // Iterate through each building and add it's associated marker
+                foreach (var building in buildingList)
+                {
+                    await module.InvokeVoidAsync("add_marker", building.Latitude, building.Longitude, building.Name, building.Description);
+                }
             }
         }
     }
