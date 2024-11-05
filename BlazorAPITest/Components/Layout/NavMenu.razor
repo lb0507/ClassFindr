@@ -15,7 +15,6 @@
 @using ClassFindrDataAccessLibrary.Models
 
 <!-- Inject the necessary dependencies -->
-@inject NavigationManager navManager
 @inject IUserData _user
 
 <!-- Top portion of the navigation menu -->
@@ -23,7 +22,7 @@
     <div class="container-fluid">
 
         <!-- Logo a the top of the menu that links back to the homepage -->
-        <a class="navbar-brand" @onclick="() => GoToHome()"> ClassFindr </a>
+        <a class="navbar-brand" href=""> ClassFindr </a>
 
         <!-- Drop down button that appears on mobile devices -->
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -42,7 +41,7 @@
 
             @if (_user.GetUserSignOnInfo() != null)
             {
-                <NavLink class="nav-link" href="" @onclick="() => _user.SignOut()">
+                <NavLink class="nav-link" href="" @onclick="() => _user.SignOut()" style="background-color: rgba(250, 10, 30, 0.6);">
                     <span class="bi bi-person-fill" aria-hidden="true"></span> Sign Out
                 </NavLink>
             }
@@ -82,10 +81,5 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
-    }
-
-    private void GoToHome()
-    {
-        navManager.NavigateTo("");
     }
 }
