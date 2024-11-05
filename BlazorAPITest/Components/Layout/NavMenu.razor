@@ -10,12 +10,14 @@
 <!-- Allow user to interact with the page -->
 @rendermode InteractiveServer
 
+@inject NavigationManager navManager
+
 <!-- Top portion of the navigation menu -->
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
 
         <!-- Logo a the top of the menu that links back to the homepage -->
-        <a class="navbar-brand" href=""> ClassFindr </a>
+        <a class="navbar-brand" @onclick="() => GoToHome()"> ClassFindr </a>
 
         <!-- Drop down button that appears on mobile devices -->
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -63,5 +65,10 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void GoToHome()
+    {
+        navManager.NavigateTo("");
     }
 }

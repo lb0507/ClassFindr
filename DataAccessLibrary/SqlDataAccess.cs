@@ -62,6 +62,26 @@ namespace ClassFindrDataAccessLibrary
             }
         }
 
+        /// <summary>
+        ///     API call for fetching all of the data from a table without any parameters
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public async Task<List<T>> LoadData<T>(string sql)
+        {
+            // Gets the connection string
+            string connectionString = _config.GetConnectionString(ConnectionStringName) ?? "";
+
+            // Open the connection and use it
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var data = await connection.QueryAsync<T>(sql);
+
+                return data.ToList();
+            }
+        }
+
         public async Task<List<T>> LoadData<T, U>(string sql, U parameters)
         {
             // Gets the connection string

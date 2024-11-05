@@ -15,10 +15,13 @@
 <!-- Allow user to interact with the page -->
 @rendermode InteractiveServer
 
+<!-- Import the API calls and necessary models -->
+@using ClassFindrDataAccessLibrary
+@using ClassFindrDataAccessLibrary.Models
+
 <!-- Inject the JavaScript dependency for using JS -->
 @inject IJSRuntime JSRuntime
-
-@using ClassFindrDataAccessLibrary.Models
+@inject IBuildingData _db
 
 <!-- Name of the browser tab -->
 <PageTitle>Home</PageTitle>
@@ -33,7 +36,26 @@
         @* !!! STAR OF THE SHOW !!! *@
         @* ====================================== *@
         <div class="map-container">
-            <div id="map" style="height: 88vh" />
+
+            <!-- MAP WITH LEAFLET -->
+            <div id="map" style="height: 80vh" />
+
+            <!-- Interaction menu -->
+            <div class="interaction-menu">
+
+                <div class="interactable">
+
+                    <u> Map Style: </u>
+
+                    <select @onchange="SwitchMap">
+                        <option selected>Default</option>
+                        <option>Satellite</option>
+                    </select>
+
+                </div>
+
+            </div>
+
         </div>
         @* ====================================== *@
 
@@ -57,58 +79,16 @@
     private string? name;
     private string? desc;
 
-    private List<BuildingModel> buildingList = new ()
-    {
-        new BuildingModel
-        {
-            BID = 1,
-            Name = "Academic Building 1",
-            Description = 
-                "<p>Lorem ipsum dolor sit amet. Eos nesciunt facere quo ipsum expedita id nemo maiores ut officia aperiam qui dolores consequuntur 33 commodi sunt et libero quae? Et nihil blanditiis vel incidunt debitis At itaque nihil. A vero officiis sit autem accusantium et inventore laudantium. Rem architecto amet qui repellat delectus aut consequatur omnis et ratione deserunt id placeat omnis ut repellendus asperiores. </p><p>Est deserunt voluptates ut obcaecati iste aut omnis aperiam qui veritatis alias aut esse magni id officiis amet qui quaerat voluptatem. Ut quisquam dicta est accusantium quia aut molestias autem ut numquam sunt sed ratione praesentium eos ratione ipsam sit voluptas iure? </p><p>Aut distinctio tempore et dolorem temporibus non dolores reiciendis et culpa dolores. Ut omnis quod et magni distinctio et fugit impedit qui enim velit sit corrupti ratione est laborum deleniti a omnis sequi. Ad totam inventore id voluptas velit et temporibus aspernatur cum eveniet corrupti! Non velit reprehenderit ab internos autem eum quia voluptatem At quis quia et voluptate unde. </p>" +
-                "<p> THIS IS A TEST FOR MANAGING TEXT OVERFLOW! </p>" +
-                "<p> THIS IS A TEST FOR MANAGING TEXT OVERFLOW! </p>" +
-                "<p> THIS IS A TEST FOR MANAGING TEXT OVERFLOW! </p>" +
-                "<p> THIS IS A TEST FOR MANAGING TEXT OVERFLOW! </p>" +
-                "<p> THIS IS A TEST FOR MANAGING TEXT OVERFLOW! </p>",
-            Latitude = 30.715125f,
-            Longitude = -95.547201f,
-            DateErected = DateTime.Now,
-            ImageSource = "https://i.ibb.co/HzxsDfh/AB1.jpg"
-        },
-        new BuildingModel
-        {
-            BID = 2,
-            Name = "Smith-Hutson Business Building",
-            Description = "Stinky business classes",
-            Latitude = 30.714313f,
-            Longitude = -95.547539f,
-            DateErected = DateTime.Now
-        },
-        new BuildingModel
-        {
-            BID = 3,
-            Name = "Lee Drain Building",
-            Description = "Math, geology, and more math, oh my!",
-            Latitude = 30.713585f,
-            Longitude = -95.548599f,
-            DateErected = DateTime.Now
-        },
-        new BuildingModel
-        {
-            BID = 4,
-            Name = "Farrington",
-            Description = "Stars, galaxies, and drunk professors",
-            Latitude = 30.713543f,
-            Longitude = -95.549657f,
-            DateErected = DateTime.Now
-        }
-    };
+    private List<BuildingModel> buildingList = new();
 
     // This method sets up the map
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+            // Fetch the list of buildings through the API
+            buildingList = await _db.FetchBuildings();
+
             // Imports the JS functions from Map.js
             module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./Map.js");
 
@@ -123,7 +103,19 @@
                     await module.InvokeVoidAsync("add_marker", building.Latitude, building.Longitude, building.Name, building.Description, building.ImageSource);
                 }
             }
+
         }
+    }
+
+    protected override void OnInitialized()
+    {
+        module?.InvokeAsync<string>("load_map");
+    }
+
+    // Switch the 
+    private void SwitchMap(ChangeEventArgs e)
+    {
+        module?.InvokeVoidAsync("switch_map", e?.Value?.ToString());
     }
 
 }

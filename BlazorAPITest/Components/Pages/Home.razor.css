@@ -4,6 +4,21 @@
     background-color: aliceblue;
 }
 
+.interaction-menu {
+    background-color: lightgray;
+    height: 8vh;
+    width: 100%;
+    border: 5px outset #b3b3b3;
+    background-color: grey;
+}
+
+.interactable {
+    display: table-caption;
+    font-size: small;
+    color: white;
+    padding: 10px;
+}
+
 .info-container {
     height: 89vh;
     border: 5px inset #64a9d1;

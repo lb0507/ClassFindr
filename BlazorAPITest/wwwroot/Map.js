@@ -4,21 +4,51 @@
     Version 10.27.24
 */
 
+
 // Create a map that overlooks SHSU by default
 let map = L.map('map').setView({ lon: -95.5474, lat: 30.7143 }, 15);
+
+// OpenStreetMaps tile set (DEFAULT)
+var openMapsLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+        maxZoom: 20,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }
+);
+
+// Satellite tile set
+var satellite = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}',
+    {
+        maxZoom: 20,
+        attribution: '&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        ext: 'jpg'
+    }
+);
+
 
 // Loads the map
 export function load_map(buildingList) {
 
-    // Add the actual map tile layer
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-        {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }
-    ).addTo(map);
+    // Add the default map tileset
+    openMapsLayer.addTo(map);
 
     return "";
+}
+
+// Toggle from default and sattelite
+export function switch_map(mapName) {
+
+    if (mapName == "Satellite")    // When on default map
+    {
+        map.addLayer(satellite);
+        map.removeLayer(openMapsLayer);
+    }
+    else if (mapName == "Default") // When on satellite map
+    {
+        map.addLayer(openMapsLayer);    
+        map.removeLayer(satellite);
+    }
+
 }
 
 // Adds a marker to the map
@@ -26,7 +56,6 @@ export function add_marker(lat, long, name, desc, img) {
 
     var marker = L.marker([lat, long])
         .addTo(map)
-        .bindPopup("<h5>" + name + "</h5>")
         .on('click', () => { update_info(name, desc, img); });
 
 }
