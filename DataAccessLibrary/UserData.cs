@@ -8,6 +8,8 @@ namespace ClassFindrDataAccessLibrary
     {
         private readonly ISqlDataAccess _db;    // Instance of the database connection
 
+        private UserModel? _model;
+
         public UserData(ISqlDataAccess db)
         {
             _db = db;
@@ -36,14 +38,13 @@ namespace ClassFindrDataAccessLibrary
                 // Gets a list of users that match the query.  Should have only one user, unless we mess up somewhere
                 UserModel? selectedUser = await _db.LoadSingle<UserModel>(query);
 
-                Console.WriteLine(selectedUser?.ToString());
-
                 string hashedPW = Utils.Security.Hash(password);    // Hash the password for submission
 
                 bool isValid = selectedUser?.Password == hashedPW;  // Get whether or not the password mathces
 
                 if (isValid)
                 {
+                    _model = selectedUser;
                     return new(true, "Successful sign in");
                 }
                 else
@@ -67,6 +68,9 @@ namespace ClassFindrDataAccessLibrary
             }
         }
 
+        /// <summary> Signs the user out by setting the selected model to null. </summary>
+        public void SignOut() => _model = null;
+
         /// <summary>
         ///     Creates the user in the database.
         /// </summary>
@@ -79,5 +83,11 @@ namespace ClassFindrDataAccessLibrary
 
             return _db.SaveData(query, user);
         }
+
+        /// <summary>
+        ///     Gets the user's current sign on information
+        /// </summary>
+        /// <returns> Currently signed in user model </returns>
+        public UserModel? GetUserSignOnInfo() { return _model; }
     }
 }

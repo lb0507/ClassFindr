@@ -3,14 +3,20 @@
     Navigation menu that contains the links to various pages of the project.
     Renders at the top of the page (mobile) or the side (desktop).
 
-    Version 10.26.24
+    Version 11.4.24
 
 *@
 
 <!-- Allow user to interact with the page -->
 @rendermode InteractiveServer
 
+<!-- Import the API calls and necessary models -->
+@using ClassFindrDataAccessLibrary
+@using ClassFindrDataAccessLibrary.Models
+
+<!-- Inject the necessary dependencies -->
 @inject NavigationManager navManager
+@inject IUserData _user
 
 <!-- Top portion of the navigation menu -->
 <div class="top-row ps-3 navbar navbar-dark">
@@ -33,9 +39,20 @@
 
         <!-- Item that redirects to the sign in page -->
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="sign_in">
-                <span class="bi bi-person-fill" aria-hidden="true"></span> Sign In
-            </NavLink>
+
+            @if (_user.GetUserSignOnInfo() != null)
+            {
+                <NavLink class="nav-link" href="" @onclick="() => _user.SignOut()">
+                    <span class="bi bi-person-fill" aria-hidden="true"></span> Sign Out
+                </NavLink>
+            }
+            else
+            {
+                <NavLink class="nav-link" href="sign_in">
+                    <span class="bi bi-person-fill" aria-hidden="true"></span> Sign In
+                </NavLink>
+            }
+            
         </div>
 
         <!-- Item that redirects to the settings page -->

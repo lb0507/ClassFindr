@@ -32,6 +32,9 @@ export function load_map(buildingList) {
     // Add the default map tileset
     openMapsLayer.addTo(map);
 
+    // Add user location to the map
+    navigator.geolocation.watchPosition(success, error);
+
     return "";
 }
 
@@ -57,6 +60,47 @@ export function add_marker(lat, long, name, desc, img) {
     var marker = L.marker([lat, long])
         .addTo(map)
         .on('click', () => { update_info(name, desc, img); });
+
+}
+
+
+let userMarker, userCircle, zoomed;
+
+const userIcon = L.icon(
+    {
+        iconUrl: './images/Walkman_orange.png',
+        iconSize: [50, 70]
+    }
+);
+
+function success(pos) {
+
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
+    const accuracy = pos.coords.accuracy;
+
+    if (userMarker) {
+        map.removeLayer(userMarker);
+        map.removeLayer(userCircle);
+    }
+
+    userMarker = L.marker([lat, lon], {icon: userIcon}).addTo(map);
+    userCircle = L.circle([lat, lon], { radius: accuracy }).addTo(map);
+
+    if (!zoomed) {
+        zoomed = map.fitBounds(userCircle.getBounds());
+    }
+    
+}
+
+function error(err) {
+
+    if (err.code == 1) {
+        alert("Please allow GPS access.");
+    }
+    else {
+        alert("Failure to retrieve user location.");
+    }
 
 }
 

@@ -1,13 +1,23 @@
 ﻿@*
     The settings page of the project.
-    Version 10.26.24
+
+    Version 11.4.24
 *@
 
-
+<!-- Link to the page -->
 @page "/settings"
 
+<!-- Allows the user to interact with the web page -->
 @rendermode InteractiveServer
 
+<!-- Import the API calls and necessary models -->
+@using ClassFindrDataAccessLibrary
+
+<!-- Inject the necessary dependencies -->
+@inject NavigationManager navManager
+@inject IUserData _user
+
+<!-- Web broser tab  -->
 <PageTitle>Settings</PageTitle>
 
 @*Styles for the settings page*@
@@ -109,9 +119,11 @@
         }
     }
 
+    // Logs the user out and navigates to the home page
     private void Logout()
     {
-        Console.WriteLine("You have logged out.");
+        _user.SignOut();
+        navManager.NavigateTo("");
     }
 
     private bool Confirm(string message)
