@@ -11,7 +11,7 @@ let map = L.map('map').setView({ lon: -95.5474, lat: 30.7143 }, 15);
 // OpenStreetMaps tile set (DEFAULT)
 var openMapsLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     {
-        maxZoom: 20,
+        maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }
 );
@@ -105,6 +105,7 @@ function update_info(name, desc, img) {
 
     // Gets the associated information box to render the mark building info in
     var parent = document.getElementById("markerInfo");
+    parent.style = "height: 100%";
 
     // Reset the information box
     while (parent.firstChild) {
@@ -113,23 +114,23 @@ function update_info(name, desc, img) {
 
     // Add the title to the information box
     var title = document.createElement("h2");
-    title.innerHTML = "<text>" + name + "</text>";
+    title.innerHTML = "<text style=\"font-size: calc(1rem + 0.9vw)\">" + name + "</text>";
     title.style = "border-bottom: 3px solid black";
     parent.appendChild(title);
 
     // Main body content container
     var contentContainer = document.createElement("div");
-    contentContainer.style = "width: 100%; height: 80vh; overflow: hidden auto;";
+    contentContainer.style = "width: 100%; height: 91%; overflow: hidden auto;";
 
     // Add image container
     var imgContainer = document.createElement("div");
-    imgContainer.style = "width: 100%; text-align: center; margin: 20px;";
+    imgContainer.style = "width: 100%; text-align: center; margin-top: 20px; margin-bottom: 20px; ";
 
     // Add the image to the image container, add it to the main content container
     var image = document.createElement("img");
     image.src = img;
     image.alt = name;
-    image.style = "height: 375px;";
+    image.style = "width: 90%;";
     imgContainer.appendChild(image);
     contentContainer.appendChild(imgContainer);
 
