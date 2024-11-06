@@ -105,7 +105,6 @@ function update_info(name, desc, img) {
 
     // Gets the associated information box to render the mark building info in
     var parent = document.getElementById("markerInfo");
-    parent.style = "height: 100%";
 
     // Reset the information box
     while (parent.firstChild) {

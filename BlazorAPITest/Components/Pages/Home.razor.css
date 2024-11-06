@@ -52,6 +52,10 @@
         display: flex;
     }
 
+    #markerInfo {
+        height: 78vh;
+    }
+
 }
 
 @media(max-width: 1599px) {
@@ -71,6 +75,10 @@
 
     .main-body {
         display: revert;
+    }
+
+    #markerInfo {
+        height: 32vh;
     }
 
 }
