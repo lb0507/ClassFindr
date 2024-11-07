@@ -18,3 +18,32 @@
     border-color: black;
     box-shadow: 10px 5px 5px rgba(0, 0, 255, .2);
 }
+
+.h1 {
+    text-align: left;
+}
+
+.settings-button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.change-password {
+    background-color: #B8860B;
+    color: white;
+}
+
+.delete-account {
+    background-color: #B8860B;
+    color: white;
+}
+
+.logout {
+    background-color: #FF4500;
+    color: white;
+}
