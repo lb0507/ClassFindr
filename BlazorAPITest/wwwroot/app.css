@@ -148,4 +148,8 @@ article {
     content: none !important;
 }
 
+.bi-clock-fill::before {
+    content: none !important;
+}
+
 /* ============================================================================= */
