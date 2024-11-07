@@ -3,7 +3,7 @@
     Navigation menu that contains the links to various pages of the project.
     Renders at the top of the page (mobile) or the side (desktop).
 
-    Version 11.4.24
+    Version 11.7.24
 
 *@
 
@@ -16,6 +16,7 @@
 
 <!-- Inject the necessary dependencies -->
 @inject IUserData _user
+@inject NavigationManager Nav
 
 <!-- Top portion of the navigation menu -->
 <div class="top-row ps-3 navbar navbar-dark">
@@ -35,31 +36,33 @@
 <!-- Remaining items underneath the main logo -->
 <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
     <nav class="flex-column">
-
-        <!-- Item that redirects to the sign in page -->
-        <div class="nav-item px-3">
-
-            @if (_user.GetUserSignOnInfo() != null)
-            {
-                <NavLink class="nav-link" href="" @onclick="() => _user.SignOut()" style="background-color: rgba(250, 10, 30, 0.6);">
+        
+        <!-- Display certain information depending on if the uer is signed in or not -->
+        @if (_user.GetUserSignOnInfo() != null)
+        {
+            <!-- Button to sign the user out -->
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="" @onclick="SignOutUser" style="background-color: rgba(250, 10, 30, 0.6);">
                     <span class="bi bi-person-fill" aria-hidden="true"></span> Sign Out
                 </NavLink>
-            }
-            else
-            {
+            </div>
+
+            <!-- Item that redirects to the schedule page -->
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="schedule">
+                    <span class="bi bi-clock-fill" aria-hidden="true"></span> Schedule
+                </NavLink>
+            </div>
+        }
+        else
+        {
+            <!-- Item that redirects to the Sign In page -->
+            <div class="nav-item px-3">
                 <NavLink class="nav-link" href="sign_in">
                     <span class="bi bi-person-fill" aria-hidden="true"></span> Sign In
                 </NavLink>
-            }
-            
-        </div>
-
-        <!-- Item that redirects to the schedule page -->
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="schedule">
-                <span class="bi bi-clock-fill" aria-hidden="true"></span> Schedule
-            </NavLink>
-        </div>
+            </div>
+        }
 
         <!-- Item that redirects to the settings page -->
         <div class="nav-item px-3">
@@ -75,7 +78,6 @@
             </NavLink>
         </div>
         
-
     </nav>
 </div>
 
@@ -89,5 +91,12 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    // Signs the user out
+    private void SignOutUser()
+    {
+        _user.SignOut();    // Perform sign out action
+        Nav.NavigateTo("/sign_in");     // Navigate the user to the sign in page
     }
 }

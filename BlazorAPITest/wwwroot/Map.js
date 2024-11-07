@@ -50,6 +50,8 @@ export function switch_map(mapName) {
 
 }
 
+
+
 // Adds a marker to the map
 export function add_marker(lat, long, name, desc, img) {
 
@@ -60,7 +62,7 @@ export function add_marker(lat, long, name, desc, img) {
 }
 
 
-let userMarker, userCircle, zoomed;
+let userMarker, userCircle, zoomed, routed;
 
 const userIcon = L.icon(
     {
@@ -85,6 +87,16 @@ function success(pos) {
 
     if (!zoomed) {
         zoomed = map.fitBounds(userCircle.getBounds());
+    }
+
+    // CHANGE THIS LATER THIS IS JUST AN EXAMPLE
+    if (!routed) {
+        L.Routing.control({
+            waypoints: [
+                L.latLng(lat, lon),
+                L.latLng(57.6792, 11.949)
+            ]
+        }).addTo(map);
     }
     
 }

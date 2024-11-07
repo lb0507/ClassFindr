@@ -115,12 +115,13 @@
         }
     }
 
+    // Set up the ap upon initialization
     protected override void OnInitialized()
     {
         module?.InvokeAsync<string>("load_map");
     }
 
-    // Switch the 
+    // Switch the map being viewed
     private void SwitchMap(ChangeEventArgs e)
     {
         module?.InvokeVoidAsync("switch_map", e?.Value?.ToString());
