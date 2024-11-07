@@ -28,7 +28,7 @@
     }
 
     @*Overall button layout*@
-    button {
+    .settings-button {
         width: 100%;
         padding: 10px;
         margin: 10px 0;
@@ -64,7 +64,7 @@
     <hr style="border: 3px solid #FF4500; width: 100%;">
 
     @*Change password Button Layout*@
-    <button class="change-password" @onclick="ChangePassword">
+    <button class="change-password settings-button" @onclick="ChangePassword">
         <svg xmlns="http://www.w3.org/2000/svg"
              width="20"
              height="20"
@@ -77,7 +77,7 @@
     </button>
 
     @*Delete Account Button Layout*@
-    <button class="delete-account" @onclick="DeleteAccount">
+    <button class="delete-account settings-button" @onclick="DeleteAccount">
         <svg xmlns="http://www.w3.org/2000/svg"
              width="20"
              height="20"
@@ -90,7 +90,7 @@
     </button>
 
     @*Logout Button Layout*@
-    <button class="logout" @onclick="Logout">
+    <button class="logout settings-button" @onclick="Logout">
         <svg xmlns="http://www.w3.org/2000/svg"
              width="20"
              height="20"
