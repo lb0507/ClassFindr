@@ -10,17 +10,17 @@
 }
 
 .fontBox {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 12px;
     padding: 10px;
-    border-style: solid; 
+    border-style: solid;
     border-width: 2px;
     border-color: black;
     box-shadow: 10px 5px 5px rgba(0, 0, 255, .2);
 }
 
 .devBox {
-    background-color: lightslategray;
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 12px;
     padding: 10px;
     border-style: solid;
