@@ -76,12 +76,34 @@ namespace ClassFindrDataAccessLibrary
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public Task CreateUser(UserModel user)
+        public async Task<bool> CreateUser(UserModel user)
         {
-            string query = @"INSERT INTO [dbo].[User] (Username, Password, Email, UserType, SRef) 
-                             VALUES (@Username, @Password, @Email, @UserType, @SRef)";
+            string existsQuery = $"SELECT * FROM [dbo].[User] WHERE [Username] = '{user.Username}' OR [Email] = '{user.Email}'";
 
-            return _db.SaveData(query, user);
+            // Attempt to load a list.  If fails, then there is no associated user
+            try
+            {
+                // Gets a list of users that match the query.  Should have only one user, unless we mess up somewhere
+                await _db.LoadSingle<UserModel>(existsQuery);
+                return false;
+            }
+            catch (Exception) {}
+
+            // Hash the password before submission
+            string hashedPW = Utils.Security.Hash(user.Password);
+
+            string query = $"INSERT INTO [dbo].[User] ([Username], [Password], [Email], [UserType]) VALUES ('{user.Username}', '{hashedPW}', '{user.Email}', '{user.Type}')";
+
+            await _db.SaveData(query);
+
+            // Check if the user is now it the database
+            try
+            {
+                // Gets a list of users that match the query.  Should have only one user, unless we mess up somewhere
+                await _db.LoadSingle<UserModel>(existsQuery);
+                return true;
+            }
+            catch (Exception) { return false; }
         }
 
         /// <summary>

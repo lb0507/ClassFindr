@@ -96,7 +96,7 @@ namespace ClassFindrDataAccessLibrary
             }
         }
 
-        public async Task SaveData<T>(string sql, T parameters)
+        public async Task SaveData(string sql)
         {
             // Gets the connection string
             string connectionString = _config.GetConnectionString(ConnectionStringName) ?? "";
@@ -104,7 +104,7 @@ namespace ClassFindrDataAccessLibrary
             // Open the connection and use it
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                await connection.ExecuteAsync(sql, parameters);
+                await connection.ExecuteAsync(sql);
             }
         }
 

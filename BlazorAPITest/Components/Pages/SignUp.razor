@@ -44,7 +44,7 @@
         <div class="input-container">
 
             <em><b> Email </b></em>
-            <input type="text" @bind-value="@username" />
+            <input type="text" @bind-value="@email" />
 
         </div>
     </div>
@@ -120,12 +120,12 @@
             @if (!isHidden)
             {
                 // Display the input as a text field - Password is SHOWN
-                <input type="text" class="pw-padding" @bind-value="@password">
+                <input type="text" class="pw-padding" @bind-value="@passwordCon">
             }
             else
             {
                 // Display the input as a password field - Password is HIDDEN
-                <input type="password" class="pw-padding" @bind-value="@password">
+                <input type="password" class="pw-padding" @bind-value="@passwordCon">
             }
 
         </div>
@@ -210,33 +210,135 @@
     */
     private async void SubmitCreatedUser()
     {
+        bool emailValid = await CheckEmail();
+        bool userValid = await CheckUsername();
+        bool passwordValid = await CheckPassword();
+
+        if (emailValid && userValid && passwordValid)
+        {
+            // Create the user to be created
+            var user = new UserModel()
+            {
+                Username = username,
+                Password = password,
+                Email = email,
+                Type = "Student"
+            };
+
+            // Creates the user record in the database
+            bool isSuccess = await _db.CreateUser(user);
+
+            // Navigate back to the home page if the user has been found
+            if (isSuccess)
+            {
+                nav.NavigateTo("/sign_in");
+            }
+            else
+            {
+                modalMsg = @"Error creating account";   // Set the message shown in the modal
+                await modal.ShowAsync();    // Show the modal with the fail message
+            }
+        }
+
+        modalMsg = default;     // Reset the message in the modal to null
+
+    }
+
+
+    // Check if the email is valid
+    private async Task<bool> CheckEmail()
+    {
+        bool isValid = true;
+
+        if (email?.Length < 1)
+        {
+            modalMsg = @"Please enter an email";   // Set the message shown in the modal
+            isValid = false;
+        }
+        else if (email?.Length > 50)
+        {
+            modalMsg = @"Email cannot contain more than 50 characters";   // Set the message shown in the modal
+            isValid = false;
+        }
+        else if (!(email ?? "").Contains("@"))
+        {
+            modalMsg = @"Please enter a valid email";   // Set the message shown in the modal
+            isValid = false;
+        }
+        else if ((email ?? "").Contains("'"))
+        {
+            modalMsg = @"Email cannot contain '";   // Set the message shown in the modal
+            isValid = false;
+        }
+
+        if (!isValid)
+        {
+            await modal.ShowAsync();    // Show the modal with the fail message
+            modalMsg = default;
+        }        
+
+        return isValid;
+    }
+
+    // Check if the username is valid
+    private async Task<bool> CheckUsername()
+    {
+        bool isValid = true;
+
+        if (username?.Length < 1)
+        {
+            modalMsg = @"Please enter a username";   // Set the message shown in the modal
+            isValid = false;
+        }
+        if (username?.Length > 50)
+        {
+            modalMsg = @"Username cannot contain more than 50 characters";   // Set the message shown in the modal
+            isValid = false;
+        }
+        else if ((username ?? "").Contains("'"))
+        {
+            modalMsg = @"Username cannot contain '";   // Set the message shown in the modal
+            isValid = false;
+        }
+
+        if (!isValid)
+        {
+            await modal.ShowAsync();    // Show the modal with the fail message
+            modalMsg = default;
+        }
+        
+        return isValid;
+    }
+
+    // Check if the password is valid
+    private async Task<bool> CheckPassword()
+    {
+        bool isValid = true;
+
         // Check if passwords match
         if (password != passwordCon)
         {
             modalMsg = @"Passwords do not match";   // Set the message shown in the modal
-            await modal.ShowAsync();    // Show the modal with the fail message
-            modalMsg = default;     // Reset the message in the modal to null
+            isValid = false;
         }
-        else
+        else if (password?.Length < 12)
         {
-            
+            modalMsg = @"Passwords must contain at least 12 characters";   // Set the message shown in the modal
+            isValid = false;
+        }
+        else if ((password ?? "").Contains("'"))
+        {
+            modalMsg = @"Passwords cannot contain '";   // Set the message shown in the modal
+            isValid = false;
         }
 
-        // Console.WriteLine($"{username}  {password}");
-        // var results = await _db.SignIn(username?.Trim() ?? "", password?.Trim() ?? "");
+        if (!isValid)
+        {
+            await modal.ShowAsync();    // Show the modal with the fail message
+            modalMsg = default;
+        }
 
-        // // Navigate back to the home page if the user has been found
-        // if (results.Item1 == true)
-        // {
-        //     nav.NavigateTo("/");
-        // }
-        // else
-        // {
-        //     modalMsg = results.Item2;   // Set the message shown in the modal
-        //     await modal.ShowAsync();    // Show the modal with the fail message
-        //     modalMsg = default;     // Reset the message in the modal to null
-        // }
-
+        return isValid;
     }
 
 }
