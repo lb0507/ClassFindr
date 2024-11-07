@@ -17,6 +17,7 @@
     border-width: 2px;
     border-color: black;
     box-shadow: 10px 5px 5px rgba(0, 0, 255, .2);
+
 }
 
 .h1 {
@@ -31,6 +32,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+
 }
 
 .change-password {
@@ -41,6 +43,8 @@
     border-color: black;
     border-width: 2px;
     border-radius: 20px;
+    width: 250px;
+    
 }
 
 .delete-account {
@@ -51,6 +55,7 @@
     border-color: black;
     border-width: 2px;
     border-radius: 20px;
+    width: 250px;
 }
 
 .logout {
@@ -61,5 +66,7 @@
     border-color: black;
     border-width: 2px;
     border-radius: 20px;
+    width: 250px;
+    
 }
 

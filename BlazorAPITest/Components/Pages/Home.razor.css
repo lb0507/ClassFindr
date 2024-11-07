@@ -2,6 +2,7 @@
     height: 100%;
     border: 5px inset #64a9d1;
     background-color: aliceblue;
+    border-radius: 10px;
 }
 
 .background {
@@ -18,6 +19,7 @@
     width: 100%;
     border: 5px outset #b3b3b3;
     background-color: grey;
+    border-radius: 10px;
 }
 
 .interactable {
@@ -31,6 +33,7 @@
     border: 5px inset #64a9d1;
     padding: 15px;
     background-color: aliceblue;
+    border-radius: 10px;
 }
 
 .image-container {

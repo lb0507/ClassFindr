@@ -26,7 +26,9 @@
         <h1>User Settings</h1>
     <hr style="border: 3px solid #FF4500; width: 100%;">
 
+
     @*Change password Button Layout*@
+    <div>
     <button class="change-password settings-button" @onclick="ChangePassword">
         <svg xmlns="http://www.w3.org/2000/svg"
              width="20"
@@ -38,8 +40,10 @@
         </svg>
         Change Password
     </button>
+        </div>
 
     @*Delete Account Button Layout*@
+    <div>
     <button class="delete-account settings-button" @onclick="DeleteAccount">
         <svg xmlns="http://www.w3.org/2000/svg"
              width="20"
@@ -51,8 +55,10 @@
         </svg>
         Delete Account
     </button>
+        </div>
 
     @*Logout Button Layout*@
+    <div>
     <button class="logout settings-button" @onclick="Logout">
         <svg xmlns="http://www.w3.org/2000/svg"
              width="20"
@@ -65,6 +71,7 @@
         </svg>
         Logout
     </button>
+        </div>
     </div>
 </div>
 

@@ -4,7 +4,7 @@
 .background {
     height: 100vh;
     background-color: darkgray; /* Background color if the image fails to load */
-    background-image: url(images/samples/sign_in_bkg.png);
+    background-image: url(images/samples/AboutPage.png);
     background-position: left;
     background-size: cover;
 }
