@@ -62,9 +62,15 @@
         @* Information box for the associated building *@
         <div class="info-container">
 
-            <div class="interaction-menu">
+            <div class="interaction-menu" style="display: inline-flex">
 
-                <input type="text"/>
+                <input type="text" style="margin: 10px"/>
+
+                    <button class="navigate-icon begin-nav" @onclick="HandleNav">
+                        <div style="padding: 7px">
+                            <i class="bi bi-geo-alt-fill" />
+                        </div>
+                    </button>
 
             </div>
 
@@ -86,6 +92,7 @@
 
     private string? name;
     private string? desc;
+    bool isNav = true;
 
     private List<BuildingModel> buildingList = new();
 
@@ -110,21 +117,40 @@
                 {
                     await module.InvokeVoidAsync("add_marker", building.Latitude, building.Longitude, building.Name, building.Description, building.ImageSource);
                 }
+
+                await module.InvokeVoidAsync("reset_navigation");
             }
-
         }
-    }
-
-    // Set up the ap upon initialization
-    protected override void OnInitialized()
-    {
-        module?.InvokeAsync<string>("load_map");
     }
 
     // Switch the map being viewed
     private void SwitchMap(ChangeEventArgs e)
     {
         module?.InvokeVoidAsync("switch_map", e?.Value?.ToString());
+    }
+
+    // Call JS function to navigate user to the selected building
+    private async void HandleNav(MouseEventArgs e)
+    {
+        // get if the user is currently navigating or not
+        isNav = await module!.InvokeAsync<bool>("is_navigated");
+
+
+        await module!.InvokeVoidAsync("reset_navigation");
+
+        // Get the currently slected coordinates
+        float[] bCoords = await module!.InvokeAsync<float[]>("get_coords");
+        float[] rCoords = await module!.InvokeAsync<float[]>("get_route_coords");
+
+        if (!isNav || bCoords[0] != rCoords[0] && bCoords[1] != rCoords[1])
+        {
+            // Check for underflow
+            if (bCoords != null && bCoords.Length >= 2)
+            {
+                await module!.InvokeVoidAsync("navigate_user", bCoords[0], bCoords[1]);
+            }
+        }
+
     }
 
 }

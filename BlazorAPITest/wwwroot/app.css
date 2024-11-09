@@ -152,4 +152,8 @@ article {
     content: none !important;
 }
 
+.bi-geo-alt-fill::before {
+    content: none !important;
+}
+
 /* ============================================================================= */
