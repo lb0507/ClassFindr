@@ -40,10 +40,20 @@ export function load_map(buildingList) {
     // Add user location to the map
     navigator.geolocation.watchPosition(success, error);
 
+    // Initialize the information box with it's associated text
+    var parent = document.getElementById("markerInfo");
+
+
+    // Create and add the message to the information box
+    var message = document.createElement("text");
+    message.innerHTML = "<br/><em style=\"padding-left: 10px;\">Please select a building from the map...</em>"
+    message.style = "color: grey;";
+    parent.appendChild(message);
+
     return "";
 }
 
-// Toggle from default and sattelite
+/** Toggle from default and sattelite map views */
 export function switch_map(mapName) {
 
     if (mapName == "Satellite")    // When on default map
@@ -59,30 +69,31 @@ export function switch_map(mapName) {
 
 }
 
-// Adds a marker to the map
+/** Adds a marker to the map */
 export function add_marker(lat, lon, name, desc, img) {
     var marker = L.marker([lat, lon])
         .addTo(map)
         .on('click', () => { update_info(lat, lon, name, desc, img); });
 }
 
-// #endregion
-
-
+/** Gets the current coordinates of the user */
 export function get_coords() {
     return currPos;
 }
 
+/** Gets the end coordinates of the route */
 export function get_route_coords() {
     return routePos;
 }
 
-let routed = null;
+let routed = null;  // Object that holds the user's navigation route
 
+/** Returns whether or not if the user has begun navigation or not already */
 export function is_navigated() {
     return routed != null;
 }
 
+/** Resets the user's route */
 export function reset_navigation() {
 
     if (routed != null) {
@@ -92,6 +103,7 @@ export function reset_navigation() {
     
 }
 
+// #endregion
 
 let userMarker, userCircle, zoomed, position;
 
@@ -180,7 +192,14 @@ export function navigate_user(bLat, bLon) {
         waypoints: [
             L.latLng(uLat, uLon),
             L.latLng(bLat, bLon)
-        ]
+        ],
+        draggableWaypoints: false,
+        routeWhileDragging: false,
+        createMarker: function () { return null; },
+        lineOptions: {
+            addWaypoints: false,
+            styles: [{ color: '#0356fc', weight: 4 }]
+        }
     }).addTo(map);
 
     routed.hide();  // Hides itinerary
