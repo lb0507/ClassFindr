@@ -53,8 +53,18 @@
             }
             else
             {
-                <br/>
-                <em class="empty-message">No @ObjectType could be found.</em>
+                // Display a different message if the user hasn't attempted to search yet
+                if (string.IsNullOrEmpty(searchValue))
+                {
+                    <br />
+                    <em class="empty-message">Start typing above to search...</em>
+                }
+                else
+                {
+                    <br />
+                    <em class="empty-message">No @ObjectType could be found.</em>
+                }
+                
             }
 
         </div>

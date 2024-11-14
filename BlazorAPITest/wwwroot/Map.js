@@ -8,6 +8,7 @@
 // Create a map that overlooks SHSU by default
 let map = L.map('map').setView({ lon: -95.5474, lat: 30.7143 }, 15);
 
+let isDisplayingAccuracy = false;   // Holds if the map shows location accuracy or not
 
 // Tilesets
 // #region
@@ -104,6 +105,28 @@ export function reset_navigation() {
     
 }
 
+/**
+ * Shows/Hides the blue circle that represents accuracy
+ * @param {any} isShown
+ */
+export function show_accuracy(isShown) {
+
+    if (isShown)
+    {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+        userCircle = L.circle([lat, lon], { radius: accuracy }).addTo(map);
+    }
+    else
+    {
+        map.removeLayer(userCircle);
+        userCircle = null;
+    }
+
+    isDisplayingAccuracy = isShown;
+}
+
 // #endregion
 
 let userMarker, userCircle, zoomed, position, hasLocation;
@@ -137,17 +160,23 @@ function success(pos) {
     // Get the latitude and longitude of the user's lacation
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
-    const accuracy = position.coords.accuracy;
 
     // Remove any previous user markers
     if (userMarker) {
         map.removeLayer(userMarker);
-        map.removeLayer(userCircle);
     }
 
     // Add the user to the map
-    userMarker = L.marker([lat, lon], {icon: userIcon}).addTo(map);
-    userCircle = L.circle([lat, lon], { radius: accuracy }).addTo(map);
+    userMarker = L.marker([lat, lon], { icon: userIcon }).addTo(map);
+
+    // Remove accuracy circle if enabled
+    if (isDisplayingAccuracy) {
+        map.removeLayer(userCircle);    // Remove present circle layer
+
+        // Create circle and add it
+        const accuracy = position.coords.accuracy;
+        userCircle = L.circle([lat, lon], { radius: accuracy }).addTo(map);
+    }
 
     // Zoom in on the user's location
     if (!zoomed) {
@@ -159,7 +188,7 @@ function success(pos) {
 
 /**
  *  Code ran upon failing to get the user's position
- * @param {any} err
+ * @param {any} err 
  */
 function error(err) {
 
@@ -193,6 +222,7 @@ export function navigate_user(bLat, bLon) {
 
         // Create and add the route to the map
         routed = L.Routing.control({
+            router: new L.Routing.osrmv1({  }),
             waypoints: [
                 L.latLng(uLat, uLon),
                 L.latLng(bLat, bLon)
@@ -243,7 +273,7 @@ export function update_info(lat, lon, name, desc, img) {
     // Create and add the title to the information box
     var title = document.createElement("h2");
     title.innerHTML = "<text style=\"font-size: calc(1rem + 0.9vw)\">" + name + "</text>";
-    title.style = "border-bottom: 3px solid black";
+    title.style = "border-bottom: 3px solid black; margin-top: 5px";
     parent.appendChild(title);
 
     // Create and add main body content container

@@ -44,14 +44,17 @@
             <div class="interaction-menu">
 
                 <div class="interactable">
-
-                    <u> Map Style: </u>
+                    <u style="padding-right: 10px">Map Style:</u>
 
                     <select @onchange="SwitchMap">
                         <option selected>Default</option>
                         <option>Satellite</option>
                     </select>
+                </div>
 
+                <div class="interactable">
+                    <input type="checkbox" @onchange="OnShowAccuracyClicked"/>
+                    <label>Show Accuracy</label>
                 </div>
 
             </div>
@@ -154,6 +157,15 @@
     private void SwitchMap(ChangeEventArgs e)
     {
         module?.InvokeVoidAsync("switch_map", e?.Value?.ToString());
+    }
+
+    // Determines whether or not to show the location accuracy
+    private async void OnShowAccuracyClicked(ChangeEventArgs e)
+    {
+        // Attempt to parse the string value from the checkbox
+        if (Boolean.TryParse(e?.Value?.ToString(), out bool result)) {
+            await module!.InvokeVoidAsync("show_accuracy", result);
+        }
     }
 
     // Call JS function to navigate user to the selected building

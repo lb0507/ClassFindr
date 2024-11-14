@@ -14,7 +14,6 @@
 }
 
 .interaction-menu {
-    background-color: lightgray;
     height: 8vh;
     max-height: 86px;
     width: 100%;
@@ -22,6 +21,8 @@
     background-color: grey;
     border-radius: 5px;
     min-height: 70px;
+    display: flex;
+    align-items: center;
 }
 
 .interactable {
@@ -76,6 +77,10 @@
 
 .cancel-nav {
     background-color: red;
+}
+
+#markerInfo {
+    overflow: hidden;
 }
 
 
