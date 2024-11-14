@@ -179,7 +179,7 @@ function success(pos) {
     }
 
     // Zoom in on the user's location
-    if (!zoomed) {
+    if (!zoomed && userCircle) {
         zoomed = map.fitBounds(userCircle.getBounds());
     }
 
