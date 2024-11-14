@@ -1,0 +1,38 @@
+﻿
+.search-bar-container {
+    width: 74%;
+    align-content: center;
+}
+
+.search-bar-container > input {
+    margin-left: 10px;
+    width: 90%;
+}
+
+.search-list {
+    width: 90%;
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: aliceblue;
+    position: sticky;
+    margin-left: 10px;
+    border: 2px solid black;
+    border-top: none;
+    border-radius: 0px 0px 12px 12px;
+}
+
+.empty-message {
+    padding-left: 30px;
+}
+
+.list-item {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+    .list-item:hover {
+        background-color: lightgray;
+        cursor: pointer;
+    }

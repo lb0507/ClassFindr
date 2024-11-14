@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassFindrDataAccessLibrary.Models
 {
-    public class BuildingModel
+    public class BuildingModel : ISearchableItem
     {
         public int BID { get; set; }
 
@@ -25,6 +25,11 @@ namespace ClassFindrDataAccessLibrary.Models
         public override string ToString()
         {
             return $"({BID}) {Name}  [{Latitude}, {Longitude}] {DateErected}";
+        }
+
+        public string? GetSearchableAspect()
+        {
+            return Name;
         }
     }
 }

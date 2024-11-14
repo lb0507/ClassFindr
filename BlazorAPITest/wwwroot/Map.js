@@ -46,7 +46,7 @@ export function load_map(buildingList) {
 
     // Create and add the message to the information box
     var message = document.createElement("text");
-    message.innerHTML = "<br/><em style=\"padding-left: 10px;\">Please select a building from the map...</em>"
+    message.innerHTML = "<br/><em style=\"padding-left: 10px;\">Please select a building to view...</em>"
     message.style = "color: grey;";
     parent.appendChild(message);
 
@@ -78,6 +78,7 @@ export function add_marker(lat, lon, name, desc, img) {
 
 /** Gets the current coordinates of the user */
 export function get_coords() {
+
     return currPos;
 }
 
@@ -105,7 +106,7 @@ export function reset_navigation() {
 
 // #endregion
 
-let userMarker, userCircle, zoomed, position;
+let userMarker, userCircle, zoomed, position, hasLocation;
 
 
 // Icons
@@ -152,6 +153,8 @@ function success(pos) {
     if (!zoomed) {
         zoomed = map.fitBounds(userCircle.getBounds());
     }
+
+    hasLocation = true;
 }
 
 /**
@@ -167,6 +170,7 @@ function error(err) {
         alert("Failure to retrieve user location.");
     }
 
+    hasLocation = false;
 }
 
 /**
@@ -176,38 +180,38 @@ function error(err) {
  * @param {any} bLon The desired building's longitude
  */
 export function navigate_user(bLat, bLon) {
-    // Route the user to the selected building
-    // =======================================
 
-    const uLat = position.coords.latitude;
-    const uLon = position.coords.longitude;
+    if (hasLocation == true)
+    {
+        const uLat = position.coords.latitude;
+        const uLon = position.coords.longitude;
 
-    // Remove nav route if there already is one
-    if (routed) {
-        map.removeControl(routed);
-    }
-
-    // Create and add the route to the map
-    routed = L.Routing.control({
-        waypoints: [
-            L.latLng(uLat, uLon),
-            L.latLng(bLat, bLon)
-        ],
-        draggableWaypoints: false,
-        routeWhileDragging: false,
-        createMarker: function () { return null; },
-        lineOptions: {
-            addWaypoints: false,
-            styles: [{ color: '#0356fc', weight: 4 }]
+        // Remove nav route if there already is one
+        if (routed) {
+            map.removeControl(routed);
         }
-    }).addTo(map);
 
-    routed.hide();  // Hides itinerary
+        // Create and add the route to the map
+        routed = L.Routing.control({
+            waypoints: [
+                L.latLng(uLat, uLon),
+                L.latLng(bLat, bLon)
+            ],
+            draggableWaypoints: false,
+            routeWhileDragging: false,
+            createMarker: function () { return null; },
+            lineOptions: {
+                addWaypoints: false,
+                styles: [{ color: '#0356fc', weight: 4 }]
+            }
+        }).addTo(map);
 
-    routePos = new Array();
-    routePos[0] = bLat;
-    routePos[1] = bLon;
-    // =======================================
+        routed.hide();  // Hides itinerary
+
+        routePos = new Array();
+        routePos[0] = bLat;
+        routePos[1] = bLon;
+    }
 }
 
 // #endregion
@@ -221,7 +225,7 @@ let currPos, routePos;
  * @param {any} desc The building's description
  * @param {any} img The building's image source
  */
-function update_info(lat, lon, name, desc, img) {
+export function update_info(lat, lon, name, desc, img) {
 
     // Update the selected position
     currPos = new Array();

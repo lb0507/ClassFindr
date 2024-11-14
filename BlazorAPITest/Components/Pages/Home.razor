@@ -5,7 +5,7 @@
     It's important that we nail this, as it will be the page that 
     the user spends most of their time on.
 
-    Version 11.4.24
+    Version 11.10.24
     
 *@
 
@@ -64,13 +64,19 @@
 
             <div class="interaction-menu" style="display: inline-flex">
 
-                <input type="text" style="margin: 10px; width: 80%"/>
+                <SearchBar 
+                    ItemList="@buildingList"
+                    OnSearch="UpdateSearch"
+                    ObjectType="buildings"
+                />
 
+                <div class="nav-button-container">
                     <button class="navigate-icon begin-nav" @onclick="HandleNav">
                         <div style="padding: 7px">
                             <i class="bi bi-geo-alt-fill" />
                         </div>
                     </button>
+                </div>
 
             </div>
 
@@ -96,6 +102,9 @@
 
     private List<BuildingModel> buildingList = new();
 
+
+    #region [Methods]
+
     // This method sets up the map
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -120,8 +129,26 @@
 
                 await module.InvokeVoidAsync("reset_navigation");
             }
+
+            StateHasChanged();  // Refresh the parameters for the search bar
+        }        
+    }
+
+    // Runs when a user selects a building from the search bar
+    private void UpdateSearch(string building)
+    {
+        // Sequentially search for the selected building
+        foreach (var b in buildingList)
+        {
+            if (b.Name == building)
+            {
+                module!.InvokeVoidAsync("update_info", b.Latitude, b.Longitude, b.Name, b.Description, b.ImageSource);
+                break;
+            }
         }
     }
+
+    #region Map functions
 
     // Switch the map being viewed
     private void SwitchMap(ChangeEventArgs e)
@@ -147,10 +174,18 @@
             // Check for underflow
             if (bCoords != null && bCoords.Length >= 2)
             {
-                await module!.InvokeVoidAsync("navigate_user", bCoords[0], bCoords[1]);
+                // Surround with try catch in event user location cannot be found
+                try
+                {
+                    await module!.InvokeVoidAsync("navigate_user", bCoords[0], bCoords[1]);
+                }
+                catch (Exception) { }
             }
         }
-
     }
+
+    #endregion
+
+    #endregion
 
 }
