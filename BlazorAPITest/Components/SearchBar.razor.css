@@ -2,12 +2,16 @@
 .search-bar-container {
     width: 74%;
     align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-self: self-start;
+    margin-top: 10px;
 }
 
-.search-bar-container > input {
-    margin-left: 10px;
-    width: 90%;
-}
+    .search-bar-container > input {
+        margin-left: 10px;
+        width: 90%;
+    }
 
 .search-list {
     width: 90%;
