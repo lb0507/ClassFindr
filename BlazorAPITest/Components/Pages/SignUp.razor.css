@@ -1,6 +1,6 @@
 ﻿.background {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: darkgray; /* Background color if the image fails to load */
     background-image: url(images/samples/sign_in_bkg.png);
     background-position: right;

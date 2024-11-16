@@ -12,6 +12,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();     // Add database connection to the program
 builder.Services.AddTransient<IBuildingData, BuildingData>();
 builder.Services.AddSingleton<IUserData, UserData>();
+builder.Services.AddSingleton<IScheduleData, ScheduleData>();
 
 var app = builder.Build();
 

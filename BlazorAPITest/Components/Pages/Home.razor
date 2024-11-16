@@ -67,7 +67,7 @@
 
             <div class="interaction-menu" style="display: inline-flex">
 
-                <SearchBar 
+                <SearchBar
                     ItemList="@buildingList"
                     OnSearch="UpdateSearch"
                     ObjectType="buildings"
@@ -173,7 +173,6 @@
     {
         // get if the user is currently navigating or not
         isNav = await module!.InvokeAsync<bool>("is_navigated");
-
 
         await module!.InvokeVoidAsync("reset_navigation");
 

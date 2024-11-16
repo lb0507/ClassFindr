@@ -1,21 +1,96 @@
 ﻿@*
 
-    Schedule page for further revision
+    Schedule page for viewing the user's current schedule
 
-    Version 11.7.24
+    Version 11.15.24
 
 *@
 
-@page "/schedule"
+<!-- Link to the page -->
+@page "/view_schedule"
 
+<!-- Set the render mode to interactive server -->
+@rendermode InteractiveServer
+
+<!-- Import the API calls and necessary models -->
+@using ClassFindrDataAccessLibrary
+@using ClassFindrDataAccessLibrary.Models
+@using ClassFindrDataAccessLibrary.Utils
+
+<!-- Inject the necessary dependencies -->
+@inject IUserData _user
+@inject IScheduleData _schedule
+
+<!-- The name of the browser tab -->
 <PageTitle>Schedule Page</PageTitle>
 
+
+<!-- Main body content -->
 <div class="content px-4 background">
     <div class="fontBox">
 
-        <strong style="Color: MediumBlue; ">Schedule</strong>
-        <p Style="padding-left: 20px">
-            Here is where the schedule is going to be
-        </p>
+        <h3>Hello, <b>@(loggedInUser?.Username ?? "User")</b>!</h3>
+        <br/>
+        <p>Use the table below to view your schedule</p>
+
+        <table class="w-100">
+
+            <thead>
+                <tr>
+                    <td style="width: 10%">
+                        <b>Course Code</b>
+                    </td>
+                    <td style="width: 20%">
+                        <b>Name</b>
+                    </td>
+                    <td style="width: 50%">
+                        <b>Description</b>
+                    </td>
+                    <td style="width: 20%">
+                        <b>Time</b>
+                    </td>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach(var item in builtSchedule ?? new ())
+                {
+                    <tr>
+                        <td>
+                            @item.CourseCode
+                        </td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Description
+                        </td>
+                        <td>
+                            @DateParser.GetScheduledTime(item)
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
     </div>
 </div>
+
+
+@code {
+
+    private UserModel? loggedInUser;
+    private List<ClassModel>? builtSchedule;
+
+
+    // Initialize the user model with the currently signed in user
+    protected async override Task OnInitializedAsync()
+    {
+        loggedInUser = _user.GetUserSignOnInfo();
+        builtSchedule = await _schedule.GetUserSchedule();
+    }
+
+}
