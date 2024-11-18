@@ -41,7 +41,7 @@
 
     <!-- Username text input field -->
     <div class="w-100 py-4 my-4" style="text-align: center">
-        <div class="input-container">
+        <div class="input-container text_shadow">
 
             <em><b> Username </b></em>
             <input type="text" @bind-value="@username"/>
@@ -52,7 +52,7 @@
     <!-- Password text/password input field -->
     <div class="w-100 py-4 my-4" style="text-align: center">
 
-        <div class="input-container" style="margin-left: -15px">
+        <div class="input-container text_shadow" style="margin-left: -15px">
 
             <em><b> Password </b></em>
 
@@ -67,8 +67,8 @@
                 <input type="password" class="pw-padding" @bind-value="@password">
             }
             
-            <div id="forgot-pw">
-                <a href="forgot_password" style="color: white">
+            <div  id="forgot-pw">
+                <a class="text_shadow"  href="forgot_password" style="color: white">
                     <b id="fpw-text">Forgot Password</b>
                 </a>
             </div>
@@ -112,14 +112,14 @@
 
     <!-- Sign in button -->
     <div class="w-100 py-4 my-4" style="text-align: center">
-        <div class="input-container">
+        <div class="input-container ">
 
             <button id="sign-in" @onclick="() => SubmitPassword()">
                 <i><b> Sign In </b></i>
             </button>
 
             <div id="forgot-pw">
-                <a href="/" style="color: white">
+                <a class="text_shadow" href="/" style="color: white">
                     <b id="fpw-text">Continue as Guest</b>
                 </a>
             </div>
