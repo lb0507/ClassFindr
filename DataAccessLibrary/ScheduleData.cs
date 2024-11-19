@@ -69,10 +69,10 @@ namespace ClassFindrDataAccessLibrary
                 new ClassModel()
                 {
                     CID = 5,
-                    CourseCode = "",
-                    Name = "",
-                    Description = "",
-                    Room = "",
+                    CourseCode = "COSC 4349",
+                    Name = "Professionalism and Ethics",
+                    Description = "Students examine the nature, need and value of well-formed ethical constructs within the digital forensics profession. Included in this course is a discussion, through case studies, of the nature of professionalism, personal and professional codes of ethics and conduct, and the professional handling of ethical and moral conflict. Students also explore the role of the professional in public policy and the awareness of consequences of ethical dissent and whistle blowing.  Prerequisite: Junior standing.",
+                    Room = "FAR 202",
                     Time = new DateTime(1, 1, 1, 9, 0, 0),
                     Days = "Tu|Th",
                     BRef = 3

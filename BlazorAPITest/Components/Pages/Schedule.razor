@@ -20,6 +20,7 @@
 <!-- Inject the necessary dependencies -->
 @inject IUserData _user
 @inject IScheduleData _schedule
+@inject NavigationManager _nav
 
 <!-- The name of the browser tab -->
 <PageTitle>Schedule Page</PageTitle>
@@ -33,50 +34,95 @@
         <br/>
         <p>Use the table below to view your schedule</p>
 
-        <table class="w-100">
 
-            <thead>
-                <tr>
-                    <td style="width: 10%">
-                        <b>Course Code</b>
-                    </td>
-                    <td style="width: 20%">
-                        <b>Name</b>
-                    </td>
-                    <td style="width: 50%">
-                        <b>Description</b>
-                    </td>
-                    <td style="width: 20%">
-                        <b>Time</b>
-                    </td>
-                </tr>
-            </thead>
+        <div class="schedule-table">
 
-            <tbody>
+            <!-- Main information table on the page -->
+            <table class="w-100">
 
-                @foreach(var item in builtSchedule ?? new ())
-                {
+                <thead style="border-bottom: 5px double">
                     <tr>
-                        <td>
-                            @item.CourseCode
+                        <td style="width: 10%">
+                            <b>Course Code</b>
                         </td>
-                        <td>
-                            @item.Name
+                        <td style="width: 20%">
+                            <b>Name</b>
                         </td>
-                        <td>
-                            @item.Description
+                        <td style="width: 50%">
+                            <b>Description</b>
                         </td>
-                        <td>
-                            @DateParser.GetScheduledTime(item)
+                        <td style="width: 20%">
+                            <b>Time</b>
                         </td>
                     </tr>
-                }
+                </thead>
 
-            </tbody>
+                <tbody>
 
-        </table>
+                    <!-- Check to see if the user has any classes in their schedule -->
+                    @if (builtSchedule != null && builtSchedule.Any()) 
+                    {
+                        // Iterate through the items in the user's schedule
+                        foreach (var item in builtSchedule)
+                        {
+                            <tr>
+                                <td>
+                                    @item.CourseCode
+                                </td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.Description
+                                </td>
+                                <td>
+                                    @DateParser.GetScheduledTime(item)
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+
+            </table>
+
+            <!-- Display a message if the user's schedule is empty -->
+            @if (!(builtSchedule != null && builtSchedule.Any()))
+            {
+                <br />
+                <em>Your schedule is empty... for now.</em>
+            }
+
+        </div>
 
     </div>
+
+    <div class="bottom-button-container">
+
+
+        @*
+        FUTURE DEVELOPMENT
+        __________________
+
+        <button>
+        Download Schedule as CSV
+        </button>
+
+        <button>
+        Download Schedule as PDF
+        </button>
+        *@
+
+        <button>
+            Route Today's Schedule
+        </button>
+
+        <button @onclick="NavigateToManagePage">
+            Manage Schedule
+        </button>
+
+    </div>
+
 </div>
 
 
@@ -85,6 +131,12 @@
     private UserModel? loggedInUser;
     private List<ClassModel>? builtSchedule;
 
+
+    // Routes to the shcedule management page
+    private void NavigateToManagePage()
+    {
+        _nav.NavigateTo("/manage_schedule");
+    }
 
     // Initialize the user model with the currently signed in user
     protected async override Task OnInitializedAsync()

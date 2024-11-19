@@ -49,7 +49,7 @@ namespace ClassFindrDataAccessLibrary
                 }
                 else
                 {
-                    return new(false, "Password is incorrect");
+                    return new(false, "Credentials are invalid");
                 }
 
             }
@@ -59,7 +59,7 @@ namespace ClassFindrDataAccessLibrary
             }
             catch (InvalidOperationException)
             {
-                return new(false, "Username is incorrect");
+                return new(false, "Credentials are invalid");
             }
             catch (Exception e)
             {

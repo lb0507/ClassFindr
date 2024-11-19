@@ -1,0 +1,31 @@
+﻿
+.background {
+    height: 100vh;
+    background-color: darkgray; /* Background color if the image fails to load */
+    background-image: url(images/samples/AboutPage.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.fontBox {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    box-shadow: 10px 5px 5px rgba(0, 0, 255, .2);
+    height: 96.5vh;
+}
+
+.devBox {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    height: 100%;
+    width: fit-content;
+    box-shadow: 5px 5px 5px rgba(0, 0, 255, .2);
+}
