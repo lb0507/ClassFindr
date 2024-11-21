@@ -11,6 +11,7 @@
 
 <!-- Link to the page -->
 @page "/"
+@page "/RouteSchedule={scheduleRef}"
 
 <!-- Allow user to interact with the page -->
 @rendermode InteractiveServer
@@ -96,6 +97,9 @@
 
 @code {
 
+    [Parameter]
+    public string? scheduleRef { get; init; }
+
     private IJSObjectReference? module;
     private string? result;
 
@@ -134,6 +138,12 @@
             }
 
             StateHasChanged();  // Refresh the parameters for the search bar
+            
+            // Route the schedule of the passed user if routing schedule
+            if (scheduleRef != null) 
+            {
+                
+            }
         }        
     }
 

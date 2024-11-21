@@ -16,11 +16,10 @@ namespace ClassFindrDataAccessLibrary
             _db = db;
         }
 
-
         public async Task<List<ClassModel>> GetUserSchedule()
         {
             // THIS IS JUST EXAMPLE CODE.  REPLACE WITH ACTUAL API CALL LATER
-            return new List<ClassModel>()
+            var output = new List<ClassModel>()
             {
                 new ClassModel()
                 {
@@ -78,6 +77,8 @@ namespace ClassFindrDataAccessLibrary
                     BRef = 3
                 }
             };
+
+            return output;
         }
     }
 }
