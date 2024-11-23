@@ -30,15 +30,13 @@ namespace ClassFindrDataAccessLibrary
                 // Form the SQL query
                 string query = "SELECT * FROM [dbo].[Building] WHERE ";
 
-                // Form the 
+                // Form the majority of the remaining query
                 foreach (var c in classes.SkipLast(1))
                 {
                     query += $"BID = {c.BRef} OR ";
                 }
 
-                query += $" BID = {classes.Last().BRef};";
-
-                Console.WriteLine(query);
+                query += $" BID = {classes.Last().BRef};";  // Form the final part of the query
 
                 // Gets a list of all buildings
                 buildings = await _db.LoadData<BuildingModel>(query);

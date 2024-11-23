@@ -7,5 +7,9 @@ namespace ClassFindrDataAccessLibrary
         Task<List<ClassModel>> GetUserSchedule();
 
         bool ScheduleMatches(int UID);
+
+        void SetShowable(bool isShowable);
+
+        bool GetRouteShowable();
     }
 }

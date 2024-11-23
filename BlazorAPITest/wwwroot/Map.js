@@ -287,7 +287,7 @@ export function navigate_schedule(latitudes, longitudes, dates) {
                                     addWaypoints: false,
                                     styles: [{ color: '#0356fc', weight: 4 }]
                                 }
-                            }).addTo(map);
+                            }).addTo(map).hide();
 
                         }
                         else {
@@ -306,12 +306,14 @@ export function navigate_schedule(latitudes, longitudes, dates) {
                                     addWaypoints: false,
                                     styles: [{ color: '#e80909', weight: 4 }]
                                 }
-                            }).addTo(map);
+                            }).addTo(map).hide();
 
                         }
                     }
-
                 });
+
+                // Quick and dirty fix for weird rendering issue
+                setTimeout(function () { map.setView({ lon: -95.5474, lat: 30.7143 }, 15); }, 100);
             }
         }
     }
@@ -373,4 +375,3 @@ export function update_info(lat, lon, name, desc, img) {
     // Add the content to the parent div
     parent.appendChild(contentContainer);
 }
-

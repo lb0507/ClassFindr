@@ -12,15 +12,13 @@
 <!-- Link to the page -->
 @page "/"
 
-<!-- Link to this page when routing a schedule -->
-@page "/route_schedule={ScheduleID}"
-
 <!-- Allow user to interact with the page -->
 @rendermode InteractiveServer
 
-<!-- Import the API calls and necessary models -->
+<!-- Import the API calls, necessary models, and utility -->
 @using ClassFindrDataAccessLibrary
 @using ClassFindrDataAccessLibrary.Models
+@using ClassFindrDataAccessLibrary.Utils
 
 <!-- Inject the JavaScript dependency for using JS -->
 @inject IJSRuntime JSRuntime
@@ -123,7 +121,7 @@
 
     #region [Methods]
 
-    // This method sets up the map
+    // This method sets up the map and any neccessary data
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -147,10 +145,11 @@
 
                 await module.InvokeVoidAsync("reset_navigation");   // Initialize navigation
 
-                // Check if the passed ID exists or not
-                if (ScheduleID != null)
+                // Check if the schedule route should show or not
+                if (_schedule.GetRouteShowable())
                 {
-                    RouteSchedule();
+                    RouteSchedule(9);
+                    _schedule.SetShowable(false);
                 }
             }
 
@@ -159,7 +158,7 @@
     }
 
     /// <summary> Routes the user's schedule based upon what day of the week it is </summary>
-    private async void RouteSchedule()
+    private async void RouteSchedule(int sRef)
     {
         string currDay = "";    // Container for the current day
 
@@ -191,7 +190,7 @@
                 break;
 
             case DayOfWeek.Saturday:
-                currDay = "Sa";
+                currDay = "Th";
                 break;
         }
 
@@ -263,13 +262,13 @@
 
     #region Map functions
 
-    // Switch the map being viewed
+    /// <summary> Switches the map tileset </summary>
     private void SwitchMap(ChangeEventArgs e)
     {
         module?.InvokeVoidAsync("switch_map", e?.Value?.ToString());
     }
 
-    // Determines whether or not to show the location accuracy
+    /// <summary> Determines whether or not to show the location accuracy </summary>
     private async void OnShowAccuracyClicked(ChangeEventArgs e)
     {
         // Attempt to parse the string value from the checkbox
@@ -278,7 +277,7 @@
         }
     }
 
-    // Call JS function to navigate user to the selected building
+    /// <summary> Handler for when the user clicks the navigation button </summary>
     private async void HandleNav(MouseEventArgs e)
     {
         // get if the user is currently navigating or not

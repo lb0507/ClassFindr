@@ -12,7 +12,7 @@
 <!-- Set the render mode to interactive server -->
 @rendermode InteractiveServer
 
-<!-- Import the API calls and necessary models -->
+<!-- Import the API calls, necessary models, and utilities -->
 @using ClassFindrDataAccessLibrary
 @using ClassFindrDataAccessLibrary.Models
 @using ClassFindrDataAccessLibrary.Utils
@@ -140,7 +140,8 @@
 
     private void HandleRouteSchedule()
     {
-        _nav.NavigateTo("/route_schedule=testID");
+        _schedule.SetShowable(true);   // Enable the schedule to be routed
+        _nav.NavigateTo($"/");
     }
 
     // Initialize the user model with the currently signed in user

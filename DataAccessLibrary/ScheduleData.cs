@@ -10,10 +10,16 @@ namespace ClassFindrDataAccessLibrary
     public class ScheduleData : IScheduleData
     {
         private readonly ISqlDataAccess _db;    // Instance of the database connection
+        private bool showScheduleRoute = false;
 
         public ScheduleData(ISqlDataAccess db)
         {
             _db = db;
+        }
+
+        public bool GetRouteShowable()
+        {
+            return showScheduleRoute;
         }
 
         public async Task<List<ClassModel>> GetUserSchedule()
@@ -84,6 +90,11 @@ namespace ClassFindrDataAccessLibrary
         public bool ScheduleMatches(int UID)
         {
             return true;
+        }
+
+        public void SetShowable(bool isShowable)
+        {
+            showScheduleRoute = isShowable;
         }
     }
 }
