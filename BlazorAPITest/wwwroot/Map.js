@@ -104,7 +104,6 @@ export function reset_navigation() {
         map.removeControl(routed);
         routed = null;
     }
-    
 }
 
 /**
@@ -246,7 +245,6 @@ export function navigate_user(bLat, bLon) {
     }
 }
 
-
 /**
  * Creates a route for the passed schedule
  * 
@@ -274,46 +272,54 @@ export function navigate_schedule(latitudes, longitudes, dates) {
                         if (dates[index] > Date.now()) {
 
                             // Create and add the route to the map [BLUE]
-                            L.Routing.control({
-                                router: new L.Routing.osrmv1({}),
-                                waypoints: [
-                                    L.latLng(lat, longitudes[index]),
-                                    L.latLng(latitudes[index + 1], longitudes[index + 1])
-                                ],
-                                draggableWaypoints: false,
-                                routeWhileDragging: false,
-                                createMarker: function () { return null; },
-                                lineOptions: {
-                                    addWaypoints: false,
-                                    styles: [{ color: '#0356fc', weight: 4 }]
+                            L.Routing.control
+                            (
+                                {
+                                    router: new L.Routing.osrmv1({}),
+                                    waypoints: 
+                                    [
+                                        L.latLng(lat, longitudes[index]),
+                                        L.latLng(latitudes[index + 1], longitudes[index + 1])
+                                    ],
+                                    draggableWaypoints: false,
+                                    routeWhileDragging: false,
+                                    createMarker: function () { return null; },
+                                    lineOptions: {
+                                        addWaypoints: false,
+                                        styles: [{ color: '#0356fc', weight: 4 }]
+                                    }
                                 }
-                            }).addTo(map).hide();
+                            ).addTo(map).hide();
 
                         }
                         else {
 
                             // Create and add the route to the map [RED]
-                            L.Routing.control({
-                                router: new L.Routing.osrmv1({}),
-                                waypoints: [
-                                    L.latLng(lat, longitudes[index]),
-                                    L.latLng(latitudes[index + 1], longitudes[index + 1])
-                                ],
-                                draggableWaypoints: false,
-                                routeWhileDragging: false,
-                                createMarker: function () { return null; },
-                                lineOptions: {
-                                    addWaypoints: false,
-                                    styles: [{ color: '#e80909', weight: 4 }]
+                            L.Routing.control
+                            (
+                                {
+                                    router: new L.Routing.osrmv1({}),
+                                    waypoints:
+                                    [
+                                        L.latLng(lat, longitudes[index]),
+                                        L.latLng(latitudes[index + 1], longitudes[index + 1])
+                                    ],
+                                    draggableWaypoints: false,
+                                    routeWhileDragging: false,
+                                    createMarker: function () { return null; },
+                                    lineOptions: {
+                                        addWaypoints: false,
+                                        styles: [{ color: '#e80909', weight: 4 }]
+                                    }
                                 }
-                            }).addTo(map).hide();
+                            ).addTo(map).hide();
 
                         }
                     }
                 });
 
                 // Quick and dirty fix for weird rendering issue
-                setTimeout(function () { map.setView({ lon: -95.5474, lat: 30.7143 }, 15); }, 100);
+                setTimeout(function () { map.setView({ lon: -95.5474, lat: 30.7143 }, 15); }, 1000);
             }
         }
     }

@@ -20,8 +20,11 @@
 @using ClassFindrDataAccessLibrary.Models
 @using ClassFindrDataAccessLibrary.Utils
 
-<!-- Inject the JavaScript dependency for using JS -->
+<!-- Inject the JavaScript dependency for using JS-->
 @inject IJSRuntime JSRuntime
+
+<!-- Inject the navigation manager for navigated to pages -->
+@inject NavigationManager _nav
 
 <!-- Inject the necessary API dependencies for this page to function -->
 @inject IBuildingData _dbBuilding
@@ -149,13 +152,83 @@
                 if (_schedule.GetRouteShowable())
                 {
                     RouteSchedule(9);
-                    _schedule.SetShowable(false);
                 }
             }
 
             StateHasChanged();  // Refresh the parameters for the search bar
         }        
     }
+
+
+    /// <summary>
+    ///     Runs when a user selects a building from the search bar
+    /// </summary>
+    /// <param name="building"> The string to search the list upon </param>
+    private void UpdateSearch(string building)
+    {
+        // Sequentially search for the selected building
+        foreach (var b in buildingList)
+        {
+            if (b.Name == building)
+            {
+                module!.InvokeVoidAsync("update_info", b.Latitude, b.Longitude, b.Name, b.Description, b.ImageSource);
+                break;
+            }
+        }
+    }
+
+    #region Map functions
+
+    /// <summary> Switches the map tileset </summary>
+    private void SwitchMap(ChangeEventArgs e)
+    {
+        module?.InvokeVoidAsync("switch_map", e?.Value?.ToString());
+    }
+
+    /// <summary> Determines whether or not to show the location accuracy </summary>
+    private async void OnShowAccuracyClicked(ChangeEventArgs e)
+    {
+        // Attempt to parse the string value from the checkbox
+        if (Boolean.TryParse(e?.Value?.ToString(), out bool result)) {
+            await module!.InvokeVoidAsync("show_accuracy", result);
+        }
+    }
+
+    #region Navigation
+
+    /// <summary> Handler for when the user clicks the navigation button </summary>
+    private async void HandleNav(MouseEventArgs e)
+    {
+        if (_schedule.GetRouteShowable())
+        {
+            _schedule.SetShowable(false);   // Set the schedule navigation to false
+            _nav.Refresh();     // Refresh the page, resets the map when routing the schedule
+        }
+
+        // get if the user is currently navigating or not
+        isNav = await module!.InvokeAsync<bool>("is_navigated");
+
+        await module!.InvokeVoidAsync("reset_navigation");
+
+        // Get the currently slected coordinates
+        float[] bCoords = await module!.InvokeAsync<float[]>("get_coords");
+        float[] rCoords = await module!.InvokeAsync<float[]>("get_route_coords");
+
+        if (!isNav || bCoords[0] != rCoords[0] && bCoords[1] != rCoords[1])
+        {
+            // Check for underflow
+            if (bCoords != null && bCoords.Length >= 2)
+            {
+                // Surround with try catch in event user location cannot be found
+                try
+                {
+                    await module!.InvokeVoidAsync("navigate_user", bCoords[0], bCoords[1]);
+                }
+                catch (Exception) { }
+            }
+        }
+    }
+
 
     /// <summary> Routes the user's schedule based upon what day of the week it is </summary>
     private async void RouteSchedule(int sRef)
@@ -213,7 +286,7 @@
         //
         // The reason why this is a tuple and not seperate lists is because we need to
         // sort the data as one unit when comparing scheduled class time
-        List<Tuple<float, float, DateTime>> cData = new ();
+        List<Tuple<float, float, DateTime>> cData = new();
 
         // Iterate through the list of classes and get the required data
         foreach (var b in buildings)
@@ -232,7 +305,7 @@
         // Sort the list based on the passed class time
         cData.Sort
         (
-            (left, right) => (int) (left.Item3 - right.Item3).Ticks 
+            (left, right) => (int)(left.Item3 - right.Item3).Ticks
         );
 
         // Convert the lists into an arrays so JavaScript doesnt whine
@@ -243,66 +316,7 @@
         await module!.InvokeVoidAsync("navigate_schedule", lats, lons, times);
     }
 
-    /// <summary>
-    ///     Runs when a user selects a building from the search bar
-    /// </summary>
-    /// <param name="building"> The string to search the list upon </param>
-    private void UpdateSearch(string building)
-    {
-        // Sequentially search for the selected building
-        foreach (var b in buildingList)
-        {
-            if (b.Name == building)
-            {
-                module!.InvokeVoidAsync("update_info", b.Latitude, b.Longitude, b.Name, b.Description, b.ImageSource);
-                break;
-            }
-        }
-    }
-
-    #region Map functions
-
-    /// <summary> Switches the map tileset </summary>
-    private void SwitchMap(ChangeEventArgs e)
-    {
-        module?.InvokeVoidAsync("switch_map", e?.Value?.ToString());
-    }
-
-    /// <summary> Determines whether or not to show the location accuracy </summary>
-    private async void OnShowAccuracyClicked(ChangeEventArgs e)
-    {
-        // Attempt to parse the string value from the checkbox
-        if (Boolean.TryParse(e?.Value?.ToString(), out bool result)) {
-            await module!.InvokeVoidAsync("show_accuracy", result);
-        }
-    }
-
-    /// <summary> Handler for when the user clicks the navigation button </summary>
-    private async void HandleNav(MouseEventArgs e)
-    {
-        // get if the user is currently navigating or not
-        isNav = await module!.InvokeAsync<bool>("is_navigated");
-
-        await module!.InvokeVoidAsync("reset_navigation");
-
-        // Get the currently slected coordinates
-        float[] bCoords = await module!.InvokeAsync<float[]>("get_coords");
-        float[] rCoords = await module!.InvokeAsync<float[]>("get_route_coords");
-
-        if (!isNav || bCoords[0] != rCoords[0] && bCoords[1] != rCoords[1])
-        {
-            // Check for underflow
-            if (bCoords != null && bCoords.Length >= 2)
-            {
-                // Surround with try catch in event user location cannot be found
-                try
-                {
-                    await module!.InvokeVoidAsync("navigate_user", bCoords[0], bCoords[1]);
-                }
-                catch (Exception) { }
-            }
-        }
-    }
+    #endregion
 
     #endregion
 

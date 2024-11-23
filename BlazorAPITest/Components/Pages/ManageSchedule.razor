@@ -18,7 +18,9 @@
 @using ClassFindrDataAccessLibrary.Utils
 
 <!-- Inject the necessary dependencies -->
+@inject NavigationManager _nav
 @inject IUserData _user
+@inject IClassData _classes
 @inject IScheduleData _schedule
 
 <!-- The name of the browser tab -->
@@ -29,9 +31,11 @@
 <div class="content px-4 background">
     <div class="fontBox">
 
-        <h3>Hello, <b>@(loggedInUser?.Username ?? "User")</b>!</h3>
-        <br/>
-        <p>Use the table below to view your schedule</p>
+        <SearchBar
+            ItemList="@availableClasses"
+            OnSearch="AddClass"
+            ObjectType="class"
+        />
 
         <table class="w-100">
 
@@ -83,14 +87,38 @@
 @code {
 
     private UserModel? loggedInUser;
-    private List<ClassModel>? builtSchedule;
+    private List<ClassModel> availableClasses = new ();
+    private List<ClassModel> builtSchedule = new ();
 
 
     // Initialize the user model with the currently signed in user
     protected async override Task OnInitializedAsync()
     {
+        // Route the user back to the home page if they aren't signed in
+        if (_user.GetUserSignOnInfo() == null)
+        {
+            _nav.NavigateTo("/");
+        }
+
         loggedInUser = _user.GetUserSignOnInfo();
-        builtSchedule = await _schedule.GetUserSchedule();
+        availableClasses = await _schedule.GetUserSchedule();
+    }
+
+
+    private void AddClass(string c)
+    {
+        string code = c.Trim().Remove(0, c.IndexOf('('));
+
+        Console.WriteLine(code);
+
+        foreach (var item in availableClasses)
+        {
+            if (code == $"({item.CourseCode})")
+            {
+                builtSchedule.Add(item);
+                availableClasses.Remove(item);
+            }
+        }
     }
 
 }

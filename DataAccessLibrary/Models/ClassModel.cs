@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClassFindrDataAccessLibrary.Models
 {
-    public class ClassModel
+    public class ClassModel : ISearchableItem
     {
         public int CID { get; set; }
 
@@ -25,5 +25,9 @@ namespace ClassFindrDataAccessLibrary.Models
 
         public int BRef { get; set; }
 
+        public string? GetSearchableAspect()
+        {
+            return $"{Name} ({CourseCode})";
+        }
     }
 }

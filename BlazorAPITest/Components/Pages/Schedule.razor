@@ -147,6 +147,12 @@
     // Initialize the user model with the currently signed in user
     protected async override Task OnInitializedAsync()
     {
+        // Route the user back to the home page if they aren't signed in
+        if (_user.GetUserSignOnInfo() == null)
+        {
+            _nav.NavigateTo("/");
+        }
+
         loggedInUser = _user.GetUserSignOnInfo();
         builtSchedule = await _schedule.GetUserSchedule();
     }
