@@ -57,7 +57,6 @@
 .nav-item {
     font-size: 1.1rem;
     padding-bottom: 0.5rem;
-    padding-left: 10px;
 }
 
     .nav-item:first-of-type {
@@ -75,6 +74,7 @@
         display: flex;
         align-items: center;
         line-height: 3rem;
+        padding-left: 12px;
     }
 
 .nav-item ::deep a.active {
