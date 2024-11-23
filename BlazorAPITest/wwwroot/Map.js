@@ -246,100 +246,74 @@ export function navigate_user(bLat, bLon) {
     }
 }
 
+
 /**
  * Creates a route for the passed schedule
  * 
- * @param {any} bLat 
- * @param {any} bLon 
+ * @param {Float32Array} latitudes The passed array of latitudes
+ * @param {Float32Array} longitudes The passed array of longitudes
+ * @param {Date} dates The passed array of datetimes
  */
 export function navigate_schedule(latitudes, longitudes, dates) {
 
-    if (latitudes.length > 1 && latitudes.length == longitudes.length) {
-
-        if (hasLocation == true) {
-
-            // Remove nav route if there already is one
-            if (routed) {
-                map.removeControl(routed);
-            }
-
-            latitudes.forEach((lat, index) => {
-
-                if (index < latitudes.length) {
-
-                    if (dates[index] > Date.now()) {
-
-                        // Create and add the route to the map [BLUE]
-                        L.Routing.control({
-                            router: new L.Routing.osrmv1({}),
-                            waypoints: [
-                                L.latLng(lat, longitudes[index]),
-                                L.latLng(latitudes[index+1], longitudes[index+1])
-                            ],
-                            draggableWaypoints: false,
-                            routeWhileDragging: false,
-                            createMarker: function () { return null; },
-                            lineOptions: {
-                                addWaypoints: false,
-                                styles: [{ color: '#0356fc', weight: 4 }]
-                            }
-                        }).addTo(map);
-
-                    }
-                    else {
-
-                        // Create and add the route to the map [RED]
-                        L.Routing.control({
-                            router: new L.Routing.osrmv1({}),
-                            waypoints: [
-                                L.latLng(lat, longitudes[index]),
-                                L.latLng(latitudes[index + 1], longitudes[index + 1])
-                            ],
-                            draggableWaypoints: false,
-                            routeWhileDragging: false,
-                            createMarker: function () { return null; },
-                            lineOptions: {
-                                addWaypoints: false,
-                                styles: [{ color: '#e80909', weight: 4 }]
-                            }
-                        }).addTo(map);
-
-                    }
-                }
-
-            });
-
-            //// Remove nav route if there already is one
-            //if (routed) {
-            //    map.removeControl(routed);
-            //}
-
-            //// Create and add the route to the map
-            //routed = L.Routing.control({
-            //    router: new L.Routing.osrmv1({}),
-            //    waypoints: [
-            //        L.latLng(uLat, uLon),
-            //        L.latLng(bLat, bLon)
-            //    ],
-            //    draggableWaypoints: false,
-            //    routeWhileDragging: false,
-            //    createMarker: function () { return null; },
-            //    lineOptions: {
-            //        addWaypoints: false,
-            //        styles: [{ color: '#0356fc', weight: 4 }]
-            //    }
-            //}).addTo(map);
-
-            //routed.hide();  // Hides itinerary
-
-            //routePos = new Array();
-            //routePos[0] = bLat;
-            //routePos[1] = bLon;
-        }
-    }
-
+    // Validate the schedule
     if (latitudes.length > 0 && latitudes.length == longitudes.length) {
-        navigate_user(latitudes[0], longitudes[0]);
+
+        // Navigate the user to the singular building if there is only one building
+        if (latitudes.length == 1) {
+            navigate_user(latitudes[0], longitudes[0]);
+        }
+        else {
+
+            if (hasLocation == true) {
+
+                latitudes.forEach((lat, index) => {
+
+                    if (index < latitudes.length) {
+
+                        if (dates[index] > Date.now()) {
+
+                            // Create and add the route to the map [BLUE]
+                            L.Routing.control({
+                                router: new L.Routing.osrmv1({}),
+                                waypoints: [
+                                    L.latLng(lat, longitudes[index]),
+                                    L.latLng(latitudes[index + 1], longitudes[index + 1])
+                                ],
+                                draggableWaypoints: false,
+                                routeWhileDragging: false,
+                                createMarker: function () { return null; },
+                                lineOptions: {
+                                    addWaypoints: false,
+                                    styles: [{ color: '#0356fc', weight: 4 }]
+                                }
+                            }).addTo(map);
+
+                        }
+                        else {
+
+                            // Create and add the route to the map [RED]
+                            L.Routing.control({
+                                router: new L.Routing.osrmv1({}),
+                                waypoints: [
+                                    L.latLng(lat, longitudes[index]),
+                                    L.latLng(latitudes[index + 1], longitudes[index + 1])
+                                ],
+                                draggableWaypoints: false,
+                                routeWhileDragging: false,
+                                createMarker: function () { return null; },
+                                lineOptions: {
+                                    addWaypoints: false,
+                                    styles: [{ color: '#e80909', weight: 4 }]
+                                }
+                            }).addTo(map);
+
+                        }
+                    }
+
+                });
+            }
+        }
     }
 }
 

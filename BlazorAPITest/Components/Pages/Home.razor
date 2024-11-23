@@ -1,16 +1,18 @@
 ﻿@*
 
-    The home page of the project.  Implementation of Leaflet with navigation.
+    The home page of the project.  Implementation of Leaflet with LRM navigation.
 
-    It's important that we nail this, as it will be the page that 
+    It's important that we nail this, as it will probably be the page that 
     the user spends most of their time on.
 
-    Version 11.10.24
+    Version 11.23.24
     
 *@
 
 <!-- Link to the page -->
 @page "/"
+
+<!-- Link to this page when routing a schedule -->
 @page "/route_schedule={ScheduleID}"
 
 <!-- Allow user to interact with the page -->
@@ -22,6 +24,8 @@
 
 <!-- Inject the JavaScript dependency for using JS -->
 @inject IJSRuntime JSRuntime
+
+<!-- Inject the necessary API dependencies for this page to function -->
 @inject IBuildingData _dbBuilding
 @inject IClassData _dbClass
 @inject IScheduleData _schedule
@@ -30,6 +34,7 @@
 <PageTitle>Home</PageTitle>
 
 
+<!-- Main body content of the page -->
 <div class="content px-4 background">
 
     <h1>Home Page</h1>
@@ -46,15 +51,16 @@
             <!-- Interaction menu -->
             <div class="interaction-menu">
 
+                <!-- Switch map dropdown -->
                 <div class="interactable">
                     <u style="padding-right: 10px">Map Style:</u>
-
                     <select @onchange="SwitchMap">
                         <option selected>Default</option>
                         <option>Satellite</option>
                     </select>
                 </div>
 
+                <!-- Show accuracy button -->
                 <div class="interactable">
                     <input type="checkbox" @onchange="OnShowAccuracyClicked"/>
                     <label>Show Accuracy</label>
@@ -70,12 +76,14 @@
 
             <div class="interaction-menu" style="display: inline-flex">
 
+                <!-- Search bar where a user can search for buildings -->
                 <SearchBar
                     ItemList="@buildingList"
                     OnSearch="UpdateSearch"
                     ObjectType="buildings"
                 />
 
+                <!-- Button to navigate user to the selected building -->
                 <div class="nav-button-container">
                     <button class="navigate-icon begin-nav" @onclick="HandleNav">
                         <div style="padding: 7px">
@@ -86,6 +94,7 @@
 
             </div>
 
+            <!-- Building information, gets updated via JavaScript -->
             <div id="markerInfo" />
         
         </div>
@@ -99,16 +108,16 @@
 
 @code {
 
+    // The passed encrypted schedule ID
     [Parameter]
     public string? ScheduleID { get; set; }
 
     private IJSObjectReference? module;     // Object for invoking JavaScript functions
     private string? result;     // Result of JavaScript functions
 
-    private string? name;
-    private string? desc;
-    bool isNav = true;
+    bool isNav = true;  // Holds whether or not the user is currently being navigated or not
 
+    // List of buildings to do all of the cool stuff with
     private List<BuildingModel> buildingList = new();
 
 
@@ -136,8 +145,9 @@
                     await module.InvokeVoidAsync("add_marker", building.Latitude, building.Longitude, building.Name, building.Description, building.ImageSource);
                 }
 
-                await module.InvokeVoidAsync("reset_navigation");
+                await module.InvokeVoidAsync("reset_navigation");   // Initialize navigation
 
+                // Check if the passed ID exists or not
                 if (ScheduleID != null)
                 {
                     RouteSchedule();
@@ -145,21 +155,68 @@
             }
 
             StateHasChanged();  // Refresh the parameters for the search bar
-            
         }        
     }
 
-
+    /// <summary> Routes the user's schedule based upon what day of the week it is </summary>
     private async void RouteSchedule()
     {
-        List<ClassModel> classes = await _schedule.GetUserSchedule();
+        string currDay = "";    // Container for the current day
+
+        // Determine the current day of the week
+        switch (DateTime.Now.DayOfWeek)
+        {
+            case DayOfWeek.Sunday:
+                currDay = "Su";
+                break;
+
+            case DayOfWeek.Monday:
+                currDay = "M";
+                break;
+
+            case DayOfWeek.Tuesday:
+                currDay = "Tu";
+                break;
+
+            case DayOfWeek.Wednesday:
+                currDay = "W";
+                break;
+
+            case DayOfWeek.Thursday:
+                currDay = "Th";
+                break;
+
+            case DayOfWeek.Friday:
+                currDay = "F";
+                break;
+
+            case DayOfWeek.Saturday:
+                currDay = "Sa";
+                break;
+        }
+
+        List<ClassModel> classes = new();  // Container for the user's schedule
+
+        // Filter the class list to only have today's classes
+        foreach (var c in await _schedule.GetUserSchedule())
+        {
+            // See if the scheduled days of the class match the current day
+            if ((c.Days ?? "").Contains(currDay))
+            {
+                classes.Add(c);
+            }
+        }
 
         // Get the list of buildings associated with the user's schedule
         List<BuildingModel> buildings = await _dbClass.GetClassBuildings(classes);
 
+        // Tuple of the required data to pass into the API call
+        //
+        // The reason why this is a tuple and not seperate lists is because we need to
+        // sort the data as one unit when comparing scheduled class time
         List<Tuple<float, float, DateTime>> cData = new ();
 
-
+        // Iterate through the list of classes and get the required data
         foreach (var b in buildings)
         {
             cData.Add
@@ -179,6 +236,7 @@
             (left, right) => (int) (left.Item3 - right.Item3).Ticks 
         );
 
+        // Convert the lists into an arrays so JavaScript doesnt whine
         float[] lats = (from c in cData select c.Item1).ToArray();
         float[] lons = (from c in cData select c.Item2).ToArray();
         DateTime[] times = (from c in cData select c.Item3).ToArray();
@@ -186,7 +244,10 @@
         await module!.InvokeVoidAsync("navigate_schedule", lats, lons, times);
     }
 
-    // Runs when a user selects a building from the search bar
+    /// <summary>
+    ///     Runs when a user selects a building from the search bar
+    /// </summary>
+    /// <param name="building"> The string to search the list upon </param>
     private void UpdateSearch(string building)
     {
         // Sequentially search for the selected building
