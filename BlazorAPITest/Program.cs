@@ -10,9 +10,11 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();     // Add database connection to the program
-builder.Services.AddTransient<IBuildingData, BuildingData>();
-builder.Services.AddSingleton<IUserData, UserData>();
-builder.Services.AddSingleton<IScheduleData, ScheduleData>();
+builder.Services.AddTransient<IBuildingData, BuildingData>();   // Add the building API services
+builder.Services.AddTransient<IClassData, ClassData>();   // Add class API services
+builder.Services.AddSingleton<IUserData, UserData>();   // Add the singleton for the user login info
+builder.Services.AddSingleton<IScheduleData, ScheduleData>();   // Add the user's schedule data
+
 
 var app = builder.Build();
 

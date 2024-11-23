@@ -10,6 +10,11 @@
 .navbar-brand {
     font-size: 1.5rem;
     font-family: fantasy;
+    background-color: aliceblue;
+    height: 45px;
+    width: 45px;
+    border-radius: 100%;
+    text-align: center;
 }
 
 .bi {

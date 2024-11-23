@@ -11,6 +11,7 @@
 
 <!-- Link to the page -->
 @page "/"
+@page "/route_schedule={ScheduleID}"
 
 <!-- Allow user to interact with the page -->
 @rendermode InteractiveServer
@@ -21,7 +22,9 @@
 
 <!-- Inject the JavaScript dependency for using JS -->
 @inject IJSRuntime JSRuntime
-@inject IBuildingData _db
+@inject IBuildingData _dbBuilding
+@inject IClassData _dbClass
+@inject IScheduleData _schedule
 
 <!-- Name of the browser tab -->
 <PageTitle>Home</PageTitle>
@@ -96,8 +99,11 @@
 
 @code {
 
-    private IJSObjectReference? module;
-    private string? result;
+    [Parameter]
+    public string? ScheduleID { get; set; }
+
+    private IJSObjectReference? module;     // Object for invoking JavaScript functions
+    private string? result;     // Result of JavaScript functions
 
     private string? name;
     private string? desc;
@@ -114,7 +120,7 @@
         if (firstRender)
         {
             // Fetch the list of buildings through the API
-            buildingList = await _db.FetchBuildings();
+            buildingList = await _dbBuilding.FetchBuildings();
 
             // Imports the JS functions from Map.js
             module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./Map.js");
@@ -131,10 +137,52 @@
                 }
 
                 await module.InvokeVoidAsync("reset_navigation");
+
+                if (ScheduleID != null)
+                {
+                    RouteSchedule();
+                }
             }
 
             StateHasChanged();  // Refresh the parameters for the search bar
         }        
+    }
+
+
+    private async void RouteSchedule()
+    {
+        List<ClassModel> classes = await _schedule.GetUserSchedule();
+
+        // Get the list of buildings associated with the user's schedule
+        List<BuildingModel> buildings = await _dbClass.GetClassBuildings(classes);
+
+        List<Tuple<float, float, DateTime>> cData = new ();
+
+
+        foreach (var b in buildings)
+        {
+            cData.Add
+            (
+                new Tuple<float, float, DateTime>
+                (
+                    b.Latitude,
+                    b.Longitude,
+                    classes.ElementAt(buildings.IndexOf(b)).Time
+                )
+            );
+        }
+
+        // Sort the list based on the passed class time
+        cData.Sort
+        (
+            (left, right) => (int) (left.Item3 - right.Item3).Ticks 
+        );
+
+        float[] lats = (from c in cData select c.Item1).ToArray();
+        float[] lons = (from c in cData select c.Item2).ToArray();
+        DateTime[] times = (from c in cData select c.Item3).ToArray();
+
+        await module!.InvokeVoidAsync("navigate_schedule", lats, lons, times);
     }
 
     // Runs when a user selects a building from the search bar

@@ -31,7 +31,7 @@ namespace ClassFindrDataAccessLibrary
                     Room = "LDB 400",
                     Time = new DateTime(1, 1, 1, 11, 0, 0),
                     Days = "Tu|Th",
-                    BRef = 3
+                    BRef = 5
                 },
                 new ClassModel()
                 {
@@ -42,7 +42,7 @@ namespace ClassFindrDataAccessLibrary
                     Room = "AB1 204",
                     Time = new DateTime(1, 1, 1, 12, 30, 0),
                     Days = "Tu|Th",
-                    BRef = 4
+                    BRef = 2
                 },
                 new ClassModel()
                 {
@@ -51,9 +51,9 @@ namespace ClassFindrDataAccessLibrary
                     Name = "Seminar in Computer Science",
                     Description = "Students learn fundamental ideas of emerging technologies and their real-life applications in ever-evolving software and hardware computing environments. The content of the course may vary from semester to semester, but will include current trends, issues, and professional skills.",
                     Room = "AB1 206",
-                    Time = new DateTime(1, 1, 1, 1, 0, 0),
+                    Time = new DateTime(1, 1, 1, 13, 0, 0),
                     Days = "W",
-                    BRef = 4
+                    BRef = 2
                 },
                 new ClassModel()
                 {
@@ -64,20 +64,25 @@ namespace ClassFindrDataAccessLibrary
                     Room = "AB1 204",
                     Time = new DateTime(1, 1, 1, 9, 0, 0),
                     Days = "M|W|F",
-                    BRef = 4
+                    BRef = 2
                 },
                 new ClassModel()
                 {
                     CID = 5,
-                    CourseCode = "",
-                    Name = "",
-                    Description = "",
-                    Room = "",
-                    Time = new DateTime(1, 1, 1, 9, 0, 0),
+                    CourseCode = "COSC 4319 01",
+                    Name = "Professionalism and Ethics",
+                    Description = "Students examine the nature, need and value of well-formed ethical constructs within the digital forensics profession. Included in this course is a discussion, through case studies, of the nature of professionalism, personal and professional codes of ethics and conduct, and the professional handling of ethical and moral conflict. Students also explore the role of the professional in public policy and the awareness of consequences of ethical dissent and whistle blowing.  Prerequisite: Junior standing.",
+                    Room = "FAR 202",
+                    Time = new DateTime(1, 1, 1, 14, 0, 0),
                     Days = "Tu|Th",
-                    BRef = 3
+                    BRef = 6
                 }
             };
+        }
+
+        public bool ScheduleMatches(int UID)
+        {
+            return true;
         }
     }
 }
