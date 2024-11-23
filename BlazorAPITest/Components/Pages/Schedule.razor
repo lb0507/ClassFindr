@@ -113,7 +113,7 @@
         </button>
         *@
 
-        <button>
+        <button @onclick=HandleRouteSchedule>
             Route Today's Schedule
         </button>
 
@@ -136,6 +136,11 @@
     private void NavigateToManagePage()
     {
         _nav.NavigateTo("/manage_schedule");
+    }
+
+    private void HandleRouteSchedule()
+    {
+        _nav.NavigateTo("/route_schedule={testID}");
     }
 
     // Initialize the user model with the currently signed in user

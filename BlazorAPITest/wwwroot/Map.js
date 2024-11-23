@@ -35,6 +35,8 @@ var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/service
 // Loads the map
 export function load_map(buildingList) {
 
+    console.log("Hey! Why are you looking in here, nosy much?");    // Easter egg for the nosy type
+
     // Add the default map tileset
     openMapsLayer.addTo(map);
 
@@ -291,7 +293,7 @@ export function navigate_schedule(latitudes, longitudes, dates) {
                             router: new L.Routing.osrmv1({}),
                             waypoints: [
                                 L.latLng(lat, longitudes[index]),
-                                L.latLng(latitudes[index + 1], longitudes[index + 1)
+                                L.latLng(latitudes[index + 1], longitudes[index + 1])
                             ],
                             draggableWaypoints: false,
                             routeWhileDragging: false,
