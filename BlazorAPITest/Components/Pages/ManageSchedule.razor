@@ -1,8 +1,8 @@
 ﻿@*
 
-    Schedule page for viewing the user's current schedule
+    Manage Schedule page for modifying the user's schedule
 
-    Version 11.15.24
+    Version 11.24.24
 
 *@
 
@@ -32,53 +32,77 @@
     <div class="fontBox">
 
         <SearchBar
+            @ref=searchBar
             ItemList="@availableClasses"
             OnSearch="AddClass"
             ObjectType="class"
         />
 
-        <table class="w-100">
+        <div class="schedule-table" style="@((searchBar.GetListIsShowing()) ? "margin-top: calc(-300px + 1%)" : "")">
 
-            <thead>
-                <tr>
-                    <td style="width: 10%">
-                        <b>Course Code</b>
-                    </td>
-                    <td style="width: 20%">
-                        <b>Name</b>
-                    </td>
-                    <td style="width: 50%">
-                        <b>Description</b>
-                    </td>
-                    <td style="width: 20%">
-                        <b>Time</b>
-                    </td>
-                </tr>
-            </thead>
+            <!-- Main information table on the page -->
+            <table class="w-100">
 
-            <tbody>
-
-                @foreach(var item in builtSchedule ?? new ())
-                {
+                <thead style="border-bottom: 5px double">
                     <tr>
-                        <td>
-                            @item.CourseCode
+                        <td style="width:3%"/>
+                        <td style="width: 10%">
+                            <b>Course Code</b>
                         </td>
-                        <td>
-                            @item.Name
+                        <td style="width: 20%">
+                            <b>Name</b>
                         </td>
-                        <td>
-                            @item.Description
+                        <td style="width: 47%">
+                            <b>Description</b>
                         </td>
-                        <td>
-                            @DateParser.GetScheduledTime(item)
+                        <td style="width: 20%">
+                            <b>Time</b>
                         </td>
                     </tr>
-                }
+                </thead>
 
-            </tbody>
+                <tbody>
 
-        </table>
+                    <!-- Check to see if the user has any classes in their schedule -->
+                    @if (builtSchedule != null && builtSchedule.Any())
+                    {
+                        // Iterate through the items in the user's schedule
+                        foreach (var item in builtSchedule)
+                        {
+                            <tr>
+                                <td style="border: none">
+                                    <div class="remove-button" @onclick="() => HandleRemoval(item)">
+                                        X
+                                    </div>
+                                </td>
+                                <td>
+                                    @item.CourseCode
+                                </td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.Description
+                                </td>
+                                <td>
+                                    @DateParser.GetScheduledTime(item)
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+
+            </table>
+
+            <!-- Display a message if the user's schedule is empty -->
+            @if (!(builtSchedule != null && builtSchedule.Any()))
+            {
+                <br />
+                <em>Your schedule is empty... for now.</em>
+            }
+            
+        </div>
 
     </div>
 </div>
@@ -86,6 +110,7 @@
 
 @code {
 
+    private SearchBar searchBar = new SearchBar();
     private UserModel? loggedInUser;
     private List<ClassModel> availableClasses = new ();
     private List<ClassModel> builtSchedule = new ();
@@ -104,12 +129,16 @@
         availableClasses = await _schedule.GetUserSchedule();
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        StateHasChanged();
+    }
 
+
+    // Adds a class to the user's built schedule
     private void AddClass(string c)
     {
         string code = c.Trim().Remove(0, c.IndexOf('('));
-
-        Console.WriteLine(code);
 
         foreach (var item in availableClasses)
         {
@@ -117,8 +146,17 @@
             {
                 builtSchedule.Add(item);
                 availableClasses.Remove(item);
+                break;
             }
         }
+    }
+
+    // Handles the removal of a class from the user's built schedule
+    private void HandleRemoval(ClassModel c)
+    {
+        availableClasses.Add(c); 
+        builtSchedule.Remove(c);
+        searchBar.RefreshList();
     }
 
 }

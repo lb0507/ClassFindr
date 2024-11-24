@@ -2,7 +2,7 @@
 
     This is the search bar found on the home and scedfule builder pages.
 
-    Version 11.10.24
+    Version 11.24.24
 
 *@
 
@@ -90,6 +90,7 @@
     private string? searchValue;
     private List<string> searchList = new();
 
+
     // Search and filter the list
     private void SearchList()
     {
@@ -120,6 +121,19 @@
     private async Task OnItemClicked(string item)
     {
         await OnSearch.InvokeAsync(item);
+        SearchList();
+    }
+
+    /// <summary> Gets whether or not the search list is showing </summary>
+    public bool GetListIsShowing()
+    {
+        return showSearchList;
+    }
+
+    /// <summary> Used to refresh the searched list, primarily when an object outside of the component has changed </summary>
+    public void RefreshList()
+    {
+        SearchList();
     }
 
 }

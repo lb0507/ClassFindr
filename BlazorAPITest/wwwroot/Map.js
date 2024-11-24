@@ -1,7 +1,15 @@
 ﻿/*
-    Javascript file for implementing Leaflet mapping software    
+    Javascript file for implementing Leaflet mapping software 
+    and navigation features.
 
-    Version 11.8.24
+    Implements the following technologies:
+        - Leaflet (mapping engine)
+        - OpenStreetMaps (Default Tileset)
+        - Esri (Satellite Tileset)
+        - LRM (Navigation engine)
+        - MapBox (Navigation backend)
+
+    Version 11.24.24
 */
 
 
@@ -9,6 +17,9 @@
 let map = L.map('map').setView({ lon: -95.5474, lat: 30.7143 }, 15);
 
 let isDisplayingAccuracy = false;   // Holds if the map shows location accuracy or not
+
+let _mb;    // Mapbox key
+let mbRouter;   // Mapbox router
 
 // Tilesets
 // #region
@@ -33,9 +44,11 @@ var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/service
 // #region 
 
 // Loads the map
-export function load_map(buildingList) {
+export function load_map(key) {
 
     console.log("Hey! Why are you looking in here, nosy much?");    // Easter egg for the nosy type
+
+    _mb = key;  // Set the mapbox key
 
     // Add the default map tileset
     openMapsLayer.addTo(map);
@@ -52,6 +65,11 @@ export function load_map(buildingList) {
     message.innerHTML = "<br/><em style=\"padding-left: 10px;\">Please select a building to view...</em>"
     message.style = "color: grey;";
     parent.appendChild(message);
+
+    // Initialize the napbox router
+    mbRouter = new L.Routing.mapbox(_mb, {
+        profile: 'mapbox/walking'
+    });
 
     return "";
 }
@@ -223,7 +241,7 @@ export function navigate_user(bLat, bLon) {
 
         // Create and add the route to the map
         routed = L.Routing.control({
-            router: new L.Routing.osrmv1({  }),
+            router: mbRouter,
             waypoints: [
                 L.latLng(uLat, uLon),
                 L.latLng(bLat, bLon)
@@ -250,7 +268,7 @@ export function navigate_user(bLat, bLon) {
  * 
  * @param {Float32Array} latitudes The passed array of latitudes
  * @param {Float32Array} longitudes The passed array of longitudes
- * @param {Date} dates The passed array of datetimes
+ * @param {Date} dates The passed array of hours
  */
 export function navigate_schedule(latitudes, longitudes, dates) {
 
@@ -269,13 +287,14 @@ export function navigate_schedule(latitudes, longitudes, dates) {
 
                     if (index < latitudes.length) {
 
-                        if (dates[index] > Date.now()) {
+                        // Check if the class has already passed or not
+                        if (dates[index] > new Date().getHours()) {
 
                             // Create and add the route to the map [BLUE]
                             L.Routing.control
                             (
                                 {
-                                    router: new L.Routing.osrmv1({}),
+                                    router: mbRouter,
                                     waypoints: 
                                     [
                                         L.latLng(lat, longitudes[index]),
@@ -298,7 +317,7 @@ export function navigate_schedule(latitudes, longitudes, dates) {
                             L.Routing.control
                             (
                                 {
-                                    router: new L.Routing.osrmv1({}),
+                                    router: mbRouter,
                                     waypoints:
                                     [
                                         L.latLng(lat, longitudes[index]),

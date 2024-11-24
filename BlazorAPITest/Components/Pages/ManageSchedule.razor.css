@@ -15,8 +15,56 @@
     border-width: 2px;
     border-color: black;
     box-shadow: 10px 5px 5px rgba(0, 0, 255, .2);
-    height: 96.5vh;
+    height: 89vh;
+    overflow: auto;
 }
+
+td {
+    padding: 5px;
+}
+
+tbody > tr {
+    vertical-align: top;
+}
+
+    tbody > tr > td {
+        border: 2px dotted;
+    }
+
+.schedule-table {
+    height: 91%;
+    margin-top: 1%;
+    overflow: auto;
+    background-color: white;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: calc(10px + 0.4vw);
+}
+
+.bottom-button-container {
+    display: flex;
+    padding-top: 1vh;
+    justify-content: flex-end;
+}
+
+    .bottom-button-container > button {
+        height: 6vh;
+        margin-right: 20px;
+        background-color: #fc5e03;
+        color: white;
+        font-size: calc(6px + 0.9vw);
+        border: none;
+        border-radius: 30px;
+        padding: 12px;
+        box-shadow: 10px 5px 5px rgba(0, 0, 255, .2);
+        font-style: oblique;
+    }
+
+        .bottom-button-container > button:hover {
+            background-color: darkblue;
+            transition: background-color 0.2s; /* Color fade in animation */
+        }
 
 .devBox {
     background-color: rgba(255, 255, 255, 0.7);
@@ -28,4 +76,16 @@
     height: 100%;
     width: fit-content;
     box-shadow: 5px 5px 5px rgba(0, 0, 255, .2);
+}
+
+.remove-button {
+    background-color: red;
+    color: white;
+    border: 2px solid black;
+    border-radius: 8px;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    align-content: center;
+    cursor: pointer;
 }

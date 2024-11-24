@@ -9,6 +9,8 @@ builder.Services.AddBlazorBootstrap();  // Add bootstrap library to project
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+
+builder.Services.AddTransient<IMapBoxConfig, MapBoxConfig>();   // Add the mapbox configuration data to the project
 builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();     // Add database connection to the program
 builder.Services.AddTransient<IBuildingData, BuildingData>();   // Add the building API services
 builder.Services.AddTransient<IClassData, ClassData>();   // Add class API services

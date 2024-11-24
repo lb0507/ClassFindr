@@ -10,6 +10,21 @@ namespace ClassFindrDataAccessLibrary.Utils
         private static string key = Environment.GetEnvironmentVariable("ENCRYPTION_KEY")
                              ?? "default-development-key";
 
+        private static Aes aes = Aes.Create();
+
+        public void Initialize()
+        {
+            // Ensure the key is exactly 32 bytes (AES-256 requires 32 bytes)
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            if (keyBytes.Length != 32)
+            {
+                Array.Resize(ref keyBytes, 32); // Truncate or pad to 32 bytes if necessary
+            }
+
+            aes.Key = keyBytes;
+            aes.GenerateIV();
+        }
+
         // Encrypt the connection string
         public static string Encrypt(string plainText)
         {

@@ -23,6 +23,9 @@
 <!-- Inject the JavaScript dependency for using JS-->
 @inject IJSRuntime JSRuntime
 
+<!-- Inject mapbox configuration data -->
+@inject IMapBoxConfig _mbConfig
+
 <!-- Inject the navigation manager for navigated to pages -->
 @inject NavigationManager _nav
 
@@ -138,7 +141,7 @@
             if (module != null)
             {
                 // Execute the load map function
-                result = await module.InvokeAsync<string>("load_map");
+                result = await module.InvokeAsync<string>("load_map", _mbConfig.Key);
 
                 // Iterate through each building and add it's associated marker
                 foreach (var building in buildingList)
@@ -239,7 +242,7 @@
         switch (DateTime.Now.DayOfWeek)
         {
             case DayOfWeek.Sunday:
-                currDay = "Su";
+                currDay = "Th";
                 break;
 
             case DayOfWeek.Monday:
@@ -263,7 +266,7 @@
                 break;
 
             case DayOfWeek.Saturday:
-                currDay = "Th";
+                currDay = "Sa";
                 break;
         }
 
@@ -311,7 +314,7 @@
         // Convert the lists into an arrays so JavaScript doesnt whine
         float[] lats = (from c in cData select c.Item1).ToArray();
         float[] lons = (from c in cData select c.Item2).ToArray();
-        DateTime[] times = (from c in cData select c.Item3).ToArray();
+        int[] times = (from c in cData select c.Item3.Hour).ToArray();
 
         await module!.InvokeVoidAsync("navigate_schedule", lats, lons, times);
     }
