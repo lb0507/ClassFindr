@@ -33,6 +33,7 @@
 @inject IBuildingData _dbBuilding
 @inject IClassData _dbClass
 @inject IScheduleData _schedule
+@inject IUserData _user
 
 <!-- Name of the browser tab -->
 <PageTitle>Home</PageTitle>
@@ -133,7 +134,7 @@
         if (firstRender)
         {
             // Fetch the list of buildings through the API
-            buildingList = await _dbBuilding.FetchBuildings();
+            buildingList = _dbBuilding.GetBuildingList();
 
             // Imports the JS functions from Map.js
             module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./Map.js");
@@ -154,7 +155,7 @@
                 // Check if the schedule route should show or not
                 if (_schedule.GetRouteShowable())
                 {
-                    RouteSchedule(9);
+                    RouteSchedule();
                 }
             }
 
@@ -202,39 +203,46 @@
     /// <summary> Handler for when the user clicks the navigation button </summary>
     private async void HandleNav(MouseEventArgs e)
     {
-        if (_schedule.GetRouteShowable())
+        try
         {
-            _schedule.SetShowable(false);   // Set the schedule navigation to false
-            _nav.Refresh();     // Refresh the page, resets the map when routing the schedule
-        }
-
-        // get if the user is currently navigating or not
-        isNav = await module!.InvokeAsync<bool>("is_navigated");
-
-        await module!.InvokeVoidAsync("reset_navigation");
-
-        // Get the currently slected coordinates
-        float[] bCoords = await module!.InvokeAsync<float[]>("get_coords");
-        float[] rCoords = await module!.InvokeAsync<float[]>("get_route_coords");
-
-        if (!isNav || bCoords[0] != rCoords[0] && bCoords[1] != rCoords[1])
-        {
-            // Check for underflow
-            if (bCoords != null && bCoords.Length >= 2)
+            if (_schedule.GetRouteShowable())
             {
-                // Surround with try catch in event user location cannot be found
-                try
-                {
-                    await module!.InvokeVoidAsync("navigate_user", bCoords[0], bCoords[1]);
-                }
-                catch (Exception) { }
+                _schedule.SetShowable(false);   // Set the schedule navigation to false
+                _nav.Refresh();     // Refresh the page, resets the map when routing the schedule
             }
+
+            // get if the user is currently navigating or not
+            isNav = await module!.InvokeAsync<bool>("is_navigated");
+
+            await module!.InvokeVoidAsync("reset_navigation");
+
+            // Get the currently slected coordinates
+            float[] bCoords = await module!.InvokeAsync<float[]>("get_coords");
+            float[] rCoords = await module!.InvokeAsync<float[]>("get_route_coords");
+
+            if (!isNav || bCoords[0] != rCoords[0] && bCoords[1] != rCoords[1])
+            {
+                // Check for underflow
+                if (bCoords != null && bCoords.Length >= 2)
+                {
+                    // Surround with try catch in event user location cannot be found
+                    try
+                    {
+                        await module!.InvokeVoidAsync("navigate_user", bCoords[0], bCoords[1]);
+                    }
+                    catch (Exception) { }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
     }
 
 
     /// <summary> Routes the user's schedule based upon what day of the week it is </summary>
-    private async void RouteSchedule(int sRef)
+    private async void RouteSchedule()
     {
         string currDay = "";    // Container for the current day
 
@@ -242,7 +250,7 @@
         switch (DateTime.Now.DayOfWeek)
         {
             case DayOfWeek.Sunday:
-                currDay = "Th";
+                currDay = "Su";
                 break;
 
             case DayOfWeek.Monday:
@@ -273,7 +281,7 @@
         List<ClassModel> classes = new();  // Container for the user's schedule
 
         // Filter the class list to only have today's classes
-        foreach (var c in await _schedule.GetUserSchedule())
+        foreach (var c in await _schedule.GetUserSchedule(_user.GetUserSignOnInfo()))
         {
             // See if the scheduled days of the class match the current day
             if ((c.Days ?? "").Contains(currDay))

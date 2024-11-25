@@ -12,7 +12,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddTransient<IMapBoxConfig, MapBoxConfig>();   // Add the mapbox configuration data to the project
 builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();     // Add database connection to the program
-builder.Services.AddTransient<IBuildingData, BuildingData>();   // Add the building API services
+builder.Services.AddSingleton<IBuildingData, BuildingData>();   // Add the building API services
 builder.Services.AddTransient<IClassData, ClassData>();   // Add class API services
 builder.Services.AddSingleton<IUserData, UserData>();   // Add the singleton for the user login info
 builder.Services.AddSingleton<IScheduleData, ScheduleData>();   // Add the user's schedule data

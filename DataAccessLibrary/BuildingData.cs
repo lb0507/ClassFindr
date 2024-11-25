@@ -13,16 +13,19 @@ namespace ClassFindrDataAccessLibrary
 
         private readonly ISqlDataAccess _db;    // Instance of the database connection
 
+        private List<BuildingModel> buildings = new ();
+
         public BuildingData(ISqlDataAccess db)
         {
             _db = db;
+            FetchBuildings();
         }
 
         /// <summary>
         ///     Fetches a list of every building in the database
         /// </summary>
         /// <returns> A list of all buildings </returns>
-        public async Task<List<BuildingModel>> FetchBuildings()
+        private async void FetchBuildings()
         {
             List<BuildingModel> selectedUser = new();
 
@@ -32,15 +35,19 @@ namespace ClassFindrDataAccessLibrary
                 string query = $"SELECT * FROM [dbo].[Building];";
 
                 // Gets a list of all buildings
-                selectedUser = await _db.LoadData<BuildingModel>(query);
+                buildings = await _db.LoadData<BuildingModel>(query);
 
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+        }
 
-            return selectedUser;
+
+        public List<BuildingModel> GetBuildingList()
+        {
+            return buildings;
         }
 
     }

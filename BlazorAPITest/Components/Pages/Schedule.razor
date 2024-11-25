@@ -154,7 +154,7 @@
         }
 
         loggedInUser = _user.GetUserSignOnInfo();
-        builtSchedule = await _schedule.GetUserSchedule();
+        builtSchedule = await _schedule.GetUserSchedule(loggedInUser);
     }
 
 }

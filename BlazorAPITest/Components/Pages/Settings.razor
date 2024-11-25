@@ -20,6 +20,16 @@
 <!-- Web broser tab  -->
 <PageTitle>Settings</PageTitle>
 
+<!-- Modal to diaply information to the user -->
+<Modal @ref=modal Title="Failure to Delete Account">
+    <BodyTemplate>
+        Cannot Delete Account - You are not signed in!
+    </BodyTemplate>
+</Modal>
+
+<!-- Confirm dialog for account deletion -->
+<ConfirmDialog @ref=dialog />
+
 @*HTML code*@
 <div class="background ">
     <div class="container fontBox">
@@ -75,19 +85,44 @@
     </div>
 </div>
 
+
 @code {
+
+    private Modal modal = default!; // Object reference to the modal
+    private ConfirmDialog dialog = default!;    // Object reference to the confirmation drop down dialog
+
     private void ChangePassword()
     {
-        // Logic for changing password
-        Console.WriteLine("Change Password functionality goes here.");
+        navManager.NavigateTo("/forgot_password");
     }
 
-    private void DeleteAccount()
+    private async void DeleteAccount()
     {
-        bool confirmation = Confirm("Are you sure you want to delete your account? This action cannot be undone.");
-        if (confirmation)
+
+        var user = _user.GetUserSignOnInfo();   // Get the signed in user
+
+        if (user != null)
         {
-            Console.WriteLine("Account deleted.");
+            bool confirmation = await dialog.ShowAsync(
+                title: "Confirm Account Deletion",
+                message1: "Are you sure that you want to delete your account?  This action will be final.");
+
+            // If the user wishes to delete their ClassFindr account
+            if (confirmation)
+            {
+                bool result = await _user.DeleteUser(user);
+
+                // Navigate to the home page upon success
+                if (result == true)
+                {
+                    _user.SignOut();    // Reset user in client memory
+                    navManager.NavigateTo("");
+                }
+            }
+        }
+        else
+        {
+            await modal.ShowAsync();
         }
     }
 
@@ -96,10 +131,5 @@
     {
         _user.SignOut();
         navManager.NavigateTo("");
-    }
-
-    private bool Confirm(string message)
-    {
-        return true; //trigger confirmation dialogue
     }
 }

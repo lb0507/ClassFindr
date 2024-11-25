@@ -16,6 +16,26 @@ namespace ClassFindrDataAccessLibrary
             _db = db;
         }
 
+        public async Task<List<ClassModel>> GetAllClasses()
+        {
+            List<ClassModel> classes = new();
+
+            try
+            {
+                // Form the SQL query
+                string query = "SELECT * FROM [dbo].[Class];";
+
+                // Gets a list of all classes
+                classes = await _db.LoadData<ClassModel>(query);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return classes;
+        }
+
         /// <summary>
         ///     Returns the buildings assoicated with a user's schedule
         /// </summary>

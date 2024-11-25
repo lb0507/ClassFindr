@@ -26,6 +26,13 @@
 <!-- The name of the browser tab -->
 <PageTitle>Schedule Page</PageTitle>
 
+<!-- Message displayed to user -->
+<Modal @ref=modal Title="Result:">
+    <BodyTemplate>
+        @modalMsg
+    </BodyTemplate>
+</Modal>
+
 
 <!-- Main body content -->
 <div class="content px-4 background">
@@ -105,10 +112,40 @@
         </div>
 
     </div>
+
+    <div class="bottom-button-container">
+
+
+        @*
+        FUTURE DEVELOPMENT
+        __________________
+
+        <button>
+        Download Schedule as CSV
+        </button>
+
+        <button>
+        Download Schedule as PDF
+        </button>
+        *@
+
+        <button @onclick=HandleCancel>
+            Cancel
+        </button>
+
+        <button @onclick="HandleSave">
+            Save Schedule
+        </button>
+
+    </div>
+
 </div>
 
 
 @code {
+
+    private Modal modal = default!;     // Object reference to the modal
+    private string? modalMsg;   // Message within the modal
 
     private SearchBar searchBar = new SearchBar();
     private UserModel? loggedInUser;
@@ -125,8 +162,15 @@
             _nav.NavigateTo("/");
         }
 
-        loggedInUser = _user.GetUserSignOnInfo();
-        availableClasses = await _schedule.GetUserSchedule();
+        loggedInUser = _user.GetUserSignOnInfo();   // Get the user data
+        builtSchedule = await _schedule.GetUserSchedule(loggedInUser);  // Get the user's currently built schedule
+        availableClasses = await _schedule.GetClassesNotInSchedule(loggedInUser);   // Get the classes not in the user's schedule
+
+        // Remove the classes that are already in the user's built schedule
+        foreach (var c in builtSchedule)
+        {
+            availableClasses.Remove(c);
+        }
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -157,6 +201,27 @@
         availableClasses.Add(c); 
         builtSchedule.Remove(c);
         searchBar.RefreshList();
+    }
+
+    private void HandleCancel()
+    {
+        _nav.NavigateTo("/view_schedule");
+    }
+
+    private async void HandleSave()
+    {
+        // Attempt to save the schedule and check the return code
+        if (await _schedule.SaveSchedule(_user.GetUserSignOnInfo(), builtSchedule))
+        {
+            modalMsg = @"Successfully saved schedule.";   // Set the message shown in the modal
+            await modal.ShowAsync();    // Show the modal with the fail message
+            await OnInitializedAsync(); // reset lists
+        }
+        else
+        {
+            modalMsg = @"Failed to save schedule data.";   // Set the message shown in the modal
+            await modal.ShowAsync();    // Show the modal with the fail message
+        }
     }
 
 }

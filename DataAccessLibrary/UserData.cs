@@ -107,9 +107,52 @@ namespace ClassFindrDataAccessLibrary
         }
 
         /// <summary>
+        ///     Deletes a user from the ClassFindr database
+        /// </summary>
+        /// <param name="user"> The user to be deleted </param>
+        /// <returns> Whether or not deletion was successful </returns>
+        public async Task<bool> DeleteUser(UserModel user)
+        {
+            string query = $"DELETE FROM [dbo].[User] WHERE UID = {user?.UID};";
+
+            try
+            {
+                await _db.SaveData(query);
+                return true;
+            }
+            catch(Exception) { return false; }
+            
+        }
+
+        /// <summary>
         ///     Gets the user's current sign on information
         /// </summary>
         /// <returns> Currently signed in user model </returns>
         public UserModel? GetUserSignOnInfo() { return _model; }
+
+        public async Task<Tuple<bool, string>> ChangePassword(string email, string username, string newPW)
+        {
+            // Username sanitization.  Prevents any [redacted] in the class from doing SQL injection.
+            if (username.Contains('\'')) return new(false, "Invalid username");
+            if (username.Contains('\'')) return new(false, "Invalid email");
+
+            // Return false if the user has not entered a value
+            else if (username.Length < 1) return new(false, "Please enter a username");
+            else if (email.Length < 1) return new(false, "Please enter an email");
+
+            // Hash the password before submission
+            string hashedPW = Utils.Security.Hash(newPW);
+
+            string query = $"UPDATE [dbo].[User] SET Password = '{hashedPW}' WHERE Username = '{username}' AND Email = '{email}'";
+
+            // Check if the user is now it the database
+            try
+            {
+                // Execute the query
+                await _db.SaveData(query);
+                return new(true, "Success");
+            }
+            catch (Exception) {return new(false, "Failed to update password.  Check your username and email."); }
+        }
     }
 }

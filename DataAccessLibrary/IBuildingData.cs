@@ -4,6 +4,7 @@ namespace ClassFindrDataAccessLibrary
 {
     public interface IBuildingData
     {
-        Task<List<BuildingModel>> FetchBuildings();
+
+        List<BuildingModel> GetBuildingList();
     }
 }
