@@ -1,11 +1,10 @@
 # Welcome to ClassFindr!
 
-ClassFindr is designed to help new students locate their classes on campus.
+ClassFindr was designed to help students, faculty, and visitors navigate the Sam Houston State University Campus.
 
-(Someone more creative than me enter something here please.   -Logan
+Since it was only a class project, the web app is no longer running, but feel free to take a look through the code!
 
+[<img align="left" alt="ClassFindr" width="600px" src="https://i.imgur.com/1P6Ql14.png" />][website]
 
-## Developers
-To start, download the latest edition of Visual Studio Community Edition with Blazor installed.
+[website]: https://classfindr-dev-web.azurewebsites.net/
 
-Clone this repository and select the ClassFindr.sln file.  Run it to see if it works properly and that everything has been properly set up.
